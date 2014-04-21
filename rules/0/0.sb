@@ -1,0 +1,1 @@
+{"program":"discuz", "detector":"Accurate", "method":"get", "cookies":false, "headers":false, "md5":"f73b6405a9bb7a06ecca93bfc89f8d81", "type":"Flass XSS", "severity":"Medium", "url":"static/image/common/mp3player.swf?file=http://ssss/xss.xml", "payload":"", "description":"", "suggestion":"update", "file":"static/image/common/mp3player.swf"}

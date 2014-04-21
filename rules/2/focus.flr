@@ -1,0 +1,2047 @@
+movie 'rules/2/focus.swf' {
+// flash 8, total frames: 1, frame rate: 60 fps, 200x600 px, compressed
+
+  movieClip 2  {
+  }
+
+  movieClip 3 item_container {
+  }
+
+  movieClip 5  {
+  }
+
+  movieClip 8 num_btn {
+  }
+
+  frame 1 {
+    function setConfig() {
+      config = config.split('|');
+      title_text_color = com.ruochi.RTools.setUn(config[1], 16777215);
+      title_bg_color = com.ruochi.RTools.setUn(config[2], 0);
+      title_bg_alpha = com.ruochi.RTools.setUn(config[3], 80);
+      btn_text_color = com.ruochi.RTools.setUn(config[4], 16777215);
+      btn_over_color = com.ruochi.RTools.setUn(config[5], 16724736);
+      btn_out_color = com.ruochi.RTools.setUn(config[6], 0);
+      autoPlayTime = com.ruochi.RTools.setUn(config[0], 10) * 60;
+    }
+
+    function setlayout() {
+      item_title.tt._width = Stage.width;
+      item_title.bg._width = Stage.width;
+      item_title._x = 0;
+      logo.alphaTo(100, 0.3);
+      logo._x = Stage.width / 2;
+      logo._y = Stage.height - 105;
+      num_bar._y = Stage.height - 10;
+      num_bar._x = Stage.width - btn_gap * item_total_num + 2;
+      if (num_bar._width > Stage.width) {
+        num_bar.onEnterFrame = function () {
+          this._x += ((Stage.width / 2 - _root._xmouse) / Stage.width) * 5;
+          if (this._x > 16) {
+            this._x = 16;
+          }
+          if (this._x < Stage.width - (btn_gap * item_total_num - 2)) {
+            this._x = Stage.width - (btn_gap * item_total_num - 2);
+          }
+        };
+
+      } else {
+        delete num_bar.onEnterFrame;
+        num_bar._x = Stage.width - btn_gap * item_total_num + 2;
+      }
+      des._x = 20;
+      if (Stage.width != 0 && Stage.height != 0) {
+        if (_root.btn_bar_complete == 1) {
+          i = 0;
+          while (i < item_total_num) {
+            setPicSize(container['item_container' + i]);
+            ++i;
+          }
+        }
+      }
+    }
+
+    function setPicSize(targetMC) {
+      if (targetMC._width / targetMC._height > Stage.width / Stage.height) {
+        temp = targetMC._height;
+        targetMC._height = Stage.height;
+        targetMC._h = targetMC._height;
+        targetMC._width = targetMC._width * Stage.height / temp;
+        targetMC._w = targetMC._width;
+      } else {
+        temp = targetMC._width;
+        targetMC._width = Stage.width;
+        targetMC._w = targetMC._width;
+        targetMC._height = targetMC._height * Stage.width / temp;
+        targetMC._h = targetMC._height;
+      }
+      targetMC._x = (Stage.width - targetMC._width) / 2;
+      targetMC._ox = targetMC._x;
+      targetMC._y = (Stage.height - targetMC._height) / 2;
+      targetMC._oy = targetMC._y;
+    }
+
+    function load_item() {
+      container.attachMovie('item_container', 'item_container' + item_i, 999999 - item_i);
+      container['item_container' + item_i].loader._lockroot = true;
+      container['item_container' + item_i].loader._quality = 'best';
+      container['item_container' + item_i]._visible = 0;
+      container['item_container' + item_i].id = item_i;
+      bcastr_MCL.loadClip(bcastr_flie_array[item_i], container['item_container' + item_i].loader);
+    }
+
+    function set_num_bar() {
+      i = 0;
+      while (i < item_total_num) {
+        num_bar.attachMovie('num_btn', 'num_btn' + i, 100 + i);
+        num_bar['num_btn' + i].id = i;
+        num_bar['num_btn' + i]._alpha = 0;
+        num_bar['num_btn' + i]._x = i * btn_gap;
+        num_bar['num_btn' + i].tt.text = i + 1;
+        num_bar['num_btn' + i].tt.textColor = btn_text_color;
+        num_bar['num_btn' + i].loading_bar._width = 0;
+        num_bar['num_btn' + i].loading_bar.colorTo(btn_over_color, 3, 'easeOutQuint');
+        num_bar['num_btn' + i].bg._xscale = 160;
+        num_bar['num_btn' + i].alphaTo(100, 0.8, 'easeOutQuint', 0.1 * i);
+        num_bar['num_btn' + i].bg.tween('_xscale', 100, 0.8, 'easeOutElastic', 0.1 * i);
+        ++i;
+      }
+      num_bar.slideTo(z, z, 0, z, 0.1 * item_total_num, 'btn_bar_complete_func()');
+    }
+
+    function bright_transform(mc, id) {
+      mc.id = id;
+      item_focus.brightnessTo(100, 0.1, 'easeInQuint', 0, 'bright_transform_next(' + mc + ')');
+    }
+
+    function bright_transform_next(mc) {
+      item_focus.swapDepths(999999 - item_focus.id);
+      item_focus.stop();
+      mc.alphaTo(100, 1, 'easeOutQuint');
+      num_bar['num_btn' + item_focus.id].bg.tween('_xscale', 100, 0.5, z);
+      num_bar['num_btn' + item_focus.id].bg.colorTo(btn_out_color, 3, 'easeOutQuint');
+      num_bar['num_btn' + item_focus.id].bg.alphaTo(50, 3, 'easeOutQuint');
+      j = 0;
+      while (j < item_total_num) {
+        num_bar['num_btn' + item_focus.id]._parent['num_btn' + j].slideTo(j * btn_gap, z, 0.3);
+        ++j;
+      }
+      delete item_focus.onRelease;
+      item_focus = mc;
+      setPicSize(item_focus);
+      item_focus.gotoAndPlay(1);
+      num_bar['num_btn' + item_focus.id].bg.tween('_xscale', 160, 0.5, z);
+      num_bar['num_btn' + item_focus.id].bg.colorTo(btn_over_color, 1, 'easeOutQuint');
+      num_bar['num_btn' + item_focus.id].bg.alphaTo(80, 1, 'easeOutQuint');
+      j = 0;
+      while (j < item_total_num) {
+        if (j < num_bar['num_btn' + item_focus.id].id) {
+          num_bar['num_btn' + item_focus.id]._parent['num_btn' + j].slideTo(j * btn_gap - 5, z, 0.3);
+        } else {
+          if (j > num_bar['num_btn' + item_focus.id].id) {
+            num_bar['num_btn' + item_focus.id]._parent['num_btn' + j].slideTo(j * btn_gap + 5, z, 0.3);
+          }
+        }
+        ++j;
+      }
+      if (bcastr_link_array[item_focus.id] != undefined and bcastr_link_array[item_focus.id] != '') {
+        item_focus.onRelease = function () {
+          getURL(bcastr_link_array[item_focus.id], '_blank');
+        };
+
+      }
+      text_effect(item_focus.id);
+      item_focus.swapDepths(1000000);
+      item_focus._visible = true;
+      item_focus.brightnessTo(100, 0);
+      temp = item_focus._width;
+      item_focus._width = item_focus._w + 60;
+      item_focus._height = item_focus._h + 60;
+      item_focus._x = item_focus._ox - 30;
+      item_focus._y = item_focus._oy - 30;
+      item_focus.tween('_width', item_focus._w, 0.3, 'easeOutQuint');
+      item_focus.tween('_height', item_focus._h, 0.3, 'easeOutQuint');
+      item_focus.slideTo(item_focus._ox, item_focus._oy, 0.3);
+      item_focus.brightnessTo(0, 0.3, 'easeOutQuint');
+    }
+
+    function text_effect(id) {
+      item_title._y = -30;
+      if (bcastr_title_array[id] != undefined and bcastr_title_array[id] != '') {
+        item_title.tt.text = bcastr_title_array[id];
+        item_title.tt1.text = item_title.tt.text;
+        item_title.tt.textColor = title_text_color;
+        item_title.bg.colorTo(title_bg_color);
+        item_title.bg._alpha = title_bg_alpha;
+        item_title.bg._height = item_title.tt._height + 1;
+        item_title.slideTo(z, 0, 0.5);
+      } else {
+        item_title.tt.text = '';
+      }
+    }
+
+    function auto_play() {
+      _root.onEnterFrame = function () {
+        _root.ra = item_focus._x + '  ' + item_focus._y + '             ' + item_focus._width + ' ' + item_focus._height;
+        ++i_time;
+        if (i_time > autoPlayTime) {
+          _root.num_bar['num_btn' + (item_focus.id + 1) % item_total_num].onRollOver();
+          i_time = 0;
+        }
+      };
+
+      _root.onMouseDown = function () {
+        i_time = 0;
+      };
+
+      _root.onMouseUp = _root.onMouseDown;
+      _root.onMouseMove = _root.onMouseDown;
+    }
+
+    function btn_bar_complete_func() {
+      btn_bar_complete = 1;
+    }
+
+    if (_global.$tweenManager == undefined) {
+      _global.$tweenManager = new zigo.tweenManager();
+    } else {
+      _global.$tweenManager.cleanUp();
+      _global.$tweenManager.init();
+    }
+    com.robertpenner.easing.Back;
+    com.robertpenner.easing.Bounce;
+    com.robertpenner.easing.Circ;
+    com.robertpenner.easing.Cubic;
+    com.robertpenner.easing.Elastic;
+    com.robertpenner.easing.Expo;
+    com.robertpenner.easing.Linear;
+    com.robertpenner.easing.Quad;
+    com.robertpenner.easing.Quart;
+    com.robertpenner.easing.Quint;
+    com.robertpenner.easing.Sine;
+    var Mp = MovieClip.prototype;
+    Mp.addListener = function () {
+      if (!this._listeners) {
+        AsBroadcaster.initialize(this);
+      }
+      this.addListener.apply(this, arguments);
+    };
+
+    ASSetPropFlags(Mp, 'addListener', 1, 0);
+    Mp.tween = function (props, pEnd, seconds, animType, delay, callback, extra1, extra2) {
+      if (_global.$tweenManager.isTweenLocked(this)) {
+        trace('tween not added, this movieclip is locked');
+        return undefined;
+      }
+      if (arguments.length < 2) {
+        trace('tween not added, props & pEnd must be defined');
+        return undefined;
+      }
+      if (typeof props == 'string') {
+        if (props.indexOf(',') > -1) {
+          props = ((props.split(' ')).join('')).split(',');
+        } else {
+          props = [props];
+        }
+      }
+      if (!(pEnd instanceof Array)) {
+        pEnd = [pEnd];
+        while (pEnd.length < props.length) {
+          pEnd.push(pEnd[0]);
+        }
+      }
+      if (seconds == undefined) {
+        seconds = 2;
+      } else {
+        if (seconds < 0.01) {
+          seconds = 0;
+        }
+      }
+      if (delay < 0.01 || delay == undefined) {
+        delay = 0;
+      }
+      switch (typeof animType) {
+        case 'string':
+          animType = animType.toLowerCase();
+          if (animType == 'linear') {
+            var eqf = com.robertpenner.easing.Linear.easeNone;
+          } else {
+            if (animType.indexOf('easeoutin') == 0) {
+              var t = animType.substr(9);
+              t = (t.charAt(0)).toUpperCase() + t.substr(1);
+              var eqf = com.robertpenner.easing[t].easeOutIn;
+            } else {
+              if (animType.indexOf('easeinout') == 0) {
+                var t = animType.substr(9);
+                t = (t.charAt(0)).toUpperCase() + t.substr(1);
+                var eqf = com.robertpenner.easing[t].easeInOut;
+              } else {
+                if (animType.indexOf('easein') == 0) {
+                  var t = animType.substr(6);
+                  t = (t.charAt(0)).toUpperCase() + t.substr(1);
+                  var eqf = com.robertpenner.easing[t].easeIn;
+                } else {
+                  if (animType.indexOf('easeout') == 0) {
+                    var t = animType.substr(7);
+                    t = (t.charAt(0)).toUpperCase() + t.substr(1);
+                    var eqf = com.robertpenner.easing[t].easeOut;
+                  }
+                }
+              }
+            }
+          }
+          if (eqf == undefined) {
+            var eqf = com.robertpenner.easing.Expo.easeOut;
+          }
+          break;
+        case 'function':
+          var eqf = animType;
+          break;
+        case 'object':
+          if (animType.ease != undefined && animType.pts != undefined) {
+            var eqf = animType.ease;
+            extra1 = animType.pts;
+          } else {
+            var eqf = com.robertpenner.easing.Expo.easeOut;
+          }
+          break;
+        default:
+          var eqf = com.robertpenner.easing.Expo.easeOut;
+      }
+      switch (typeof callback) {
+        case 'function':
+          callback = {'func': callback, 'scope': this._parent};
+          break;
+        case 'string':
+          var ilp;
+          var funcp;
+          var scope;
+          var args;
+          var a;
+          ilp = callback.indexOf('(');
+          funcp = callback.slice(0, ilp);
+          scope = eval(funcp.slice(0, funcp.lastIndexOf('.')));
+          func = eval(funcp);
+          args = (callback.slice(ilp + 1, callback.lastIndexOf(')'))).split(',');
+          var i = 0;
+          while (i < args.length) {
+            a = eval(args[i]);
+            if (a != undefined) {
+              args[i] = a;
+            }
+            ++i;
+          }
+          callback = {'func': func, 'scope': scope, 'args': args};
+      }
+      if (_global.$tweenManager.autoStop) {
+        _global.$tweenManager.removeTween(this);
+      }
+      if (delay > 0) {
+        _global.$tweenManager.addTweenWithDelay(delay, this, props, pEnd, seconds, eqf, callback, extra1, extra2);
+      } else {
+        _global.$tweenManager.addTween(this, props, pEnd, seconds, eqf, callback, extra1, extra2);
+      }
+    };
+
+    Mp.stopTween = function (props) {
+      if (typeof props == 'string') {
+        if (props.indexOf(',') > -1) {
+          props = ((props.split(' ')).join('')).split(',');
+        } else {
+          props = [props];
+        }
+      }
+      _global.$tweenManager.removeTween(this, props);
+    };
+
+    Mp.isTweening = function (prop) {
+      return _global.$tweenManager.isTweening(this, prop);
+    };
+
+    Mp.getTweens = function () {
+      return _global.$tweenManager.getTweens(this);
+    };
+
+    Mp.lockTween = function () {
+      _global.$tweenManager.lockTween(this, true);
+    };
+
+    Mp.unlockTween = function () {
+      _global.$tweenManager.lockTween(this, false);
+    };
+
+    Mp.isTweenLocked = function () {
+      return _global.$tweenManager.isTweenLocked(this);
+    };
+
+    Mp.isTweenPaused = function (prop) {
+      return _global.$tweenManager.isTweenPaused(this, prop);
+    };
+
+    Mp.pauseTween = function (props) {
+      var v4;
+      if (props != undefined) {
+        if (typeof props == 'string') {
+          if (props.indexOf(',') > -1) {
+            props = ((props.split(' ')).join('')).split(',');
+          } else {
+            props = [props];
+          }
+        }
+        v4 = {};
+        for (var v5 in props) {
+          v4[props[v5]] = true;
+        }
+      }
+      _global.$tweenManager.pauseTween(this, v4);
+    };
+
+    Mp.unpauseTween = function (props) {
+      var v4;
+      if (props != undefined) {
+        if (typeof props == 'string') {
+          if (props.indexOf(',') > -1) {
+            props = ((props.split(' ')).join('')).split(',');
+          } else {
+            props = [props];
+          }
+        }
+        v4 = {};
+        for (var v5 in props) {
+          v4[props[v5]] = true;
+        }
+      }
+      _global.$tweenManager.unpauseTween(this, v4);
+    };
+
+    Mp.pauseAllTweens = function () {
+      _global.$tweenManager.pauseTween();
+    };
+
+    Mp.unpauseAllTweens = function () {
+      _global.$tweenManager.unpauseTween();
+    };
+
+    Mp.stopAllTweens = function () {
+      _global.$tweenManager.stopAll();
+    };
+
+    Mp.ffTween = function (props) {
+      var v4;
+      if (props != undefined) {
+        if (typeof props == 'string') {
+          if (props.indexOf(',') > -1) {
+            props = ((props.split(' ')).join('')).split(',');
+          } else {
+            props = [props];
+          }
+        }
+        v4 = {};
+        for (var v5 in props) {
+          v4[props[v5]] = true;
+        }
+      }
+      _global.$tweenManager.ffTween(this, v4);
+    };
+
+    Mp.rewTween = function (props) {
+      var v4;
+      if (props != undefined) {
+        if (typeof props == 'string') {
+          if (props.indexOf(',') > -1) {
+            props = ((props.split(' ')).join('')).split(',');
+          } else {
+            props = [props];
+          }
+        }
+        v4 = {};
+        for (var v5 in props) {
+          v4[props[v5]] = true;
+        }
+      }
+      _global.$tweenManager.rewTween(this, v4);
+    };
+
+    Mp.alphaTo = function (destAlpha, seconds, animType, delay, callback, extra1, extra2) {
+      this.tween(['_alpha'], [destAlpha], seconds, animType, delay, callback, extra1, extra2);
+    };
+
+    Mp.scaleTo = function (destScale, seconds, animType, delay, callback, extra1, extra2) {
+      this.tween(['_xscale', '_yscale'], [destScale, destScale], seconds, animType, delay, callback, extra1, extra2);
+    };
+
+    Mp.sizeTo = function (destSize, seconds, animType, delay, callback, extra1, extra2) {
+      this.tween(['_width', '_height'], [destSize, destSize], seconds, animType, delay, callback, extra1, extra2);
+    };
+
+    Mp.slideTo = function (destX, destY, seconds, animType, delay, callback, extra1, extra2) {
+      this.tween(['_x', '_y'], [destX, destY], seconds, animType, delay, callback, extra1, extra2);
+    };
+
+    Mp.rotateTo = function (destRotation, seconds, animType, delay, callback, extra1, extra2) {
+      this.tween(['_rotation'], [destRotation], seconds, animType, delay, callback, extra1, extra2);
+    };
+
+    _global.getColorTransObj = function (type, amt, rgb) {
+      switch (type) {
+          return {'rb': 0, 'ra': 100, 'gb': 0, 'ga': 100, 'bb': 0, 'ba': 100};
+        case 'brightness':
+          var v4 = 100 - Math.abs(amt);
+          var v6 = 0;
+          if (amt > 0) {
+            v6 = 256 * (amt / 100);
+          }
+          return {'ra': v4, 'rb': v6, 'ga': v4, 'gb': v6, 'ba': v4, 'bb': v6};
+        case 'brightOffset':
+          var v6 = 256 * (amt / 100);
+          return {'ra': 100, 'rb': v6, 'ga': 100, 'gb': v6, 'ba': 100, 'bb': v6};
+        case 'contrast':
+          var v2 = {};
+          v2.ba = amt;
+          v2.ga = v2.ba;
+          v2.ra = v2.ba;
+          v2.bb = 128 - 1.28 * amt;
+          v2.gb = v2.bb;
+          v2.rb = v2.bb;
+          return v2;
+        case 'invertColor':
+          var v2 = {};
+          v2.ba = 100 - 2 * amt;
+          v2.ga = v2.ba;
+          v2.ra = v2.ba;
+          v2.bb = amt * 2.55;
+          v2.gb = v2.bb;
+          v2.rb = v2.bb;
+          return v2;
+        case 'tint':
+          if (rgb == undefined || rgb == null) {
+            return {'rb': 0, 'ra': 100, 'gb': 0, 'ga': 100, 'bb': 0, 'ba': 100};
+          }
+          var v8 = rgb >> 16;
+          var v9 = rgb >> 8 & 255;
+          var v7 = rgb & 255;
+          var v5 = amt / 100;
+          var v2 = {'rb': v8 * v5, 'gb': v9 * v5, 'bb': v7 * v5};
+          v2.ba = 100 - amt;
+          v2.ga = v2.ba;
+          v2.ra = v2.ba;
+          return v2;
+      }
+      return {'rb': 0, 'ra': 100, 'gb': 0, 'ga': 100, 'bb': 0, 'ba': 100};
+    };
+
+    Mp.brightnessTo = function (bright, seconds, animType, delay, callback, extra1, extra2) {
+      this.tween(['_ct_'], [getColorTransObj('brightness', bright)], seconds, animType, delay, callback, extra1, extra2);
+    };
+
+    Mp.brightOffsetTo = function (percent, seconds, animType, delay, callback, extra1, extra2) {
+      this.tween(['_ct_'], [getColorTransObj('brightOffset', percent)], seconds, animType, delay, callback, extra1, extra2);
+    };
+
+    Mp.contrastTo = function (percent, seconds, animType, delay, callback, extra1, extra2) {
+      this.tween(['_ct_'], [getColorTransObj('contrast', percent)], seconds, animType, delay, callback, extra1, extra2);
+    };
+
+    Mp.colorTo = function (rgb, seconds, animType, delay, callback, extra1, extra2) {
+      this.tween(['_ct_'], [getColorTransObj('tint', 100, rgb)], seconds, animType, delay, callback, extra1, extra2);
+    };
+
+    Mp.colorTransformTo = function (ra, rb, ga, gb, ba, bb, aa, ab, seconds, animType, delay, callback, extra1, extra2) {
+      var v2 = {'ra': ra, 'rb': rb, 'ga': ga, 'gb': gb, 'ba': ba, 'bb': bb, 'aa': aa, 'ab': ab};
+      this.tween(['_ct_'], [v2], seconds, animType, delay, callback, extra1, extra2);
+    };
+
+    Mp.invertColorTo = function (percent, seconds, animType, delay, callback, extra1, extra2) {
+      this.tween(['_ct_'], [getColorTransObj('invertColor', percent)], seconds, animType, delay, callback, extra1, extra2);
+    };
+
+    Mp.tintTo = function (rgb, percent, seconds, animType, delay, callback, extra1, extra2) {
+      this.tween(['_ct_'], [getColorTransObj('tint', percent, rgb)], seconds, animType, delay, callback, extra1, extra2);
+    };
+
+    Mp.getFrame = function () {
+      return this._currentframe;
+    };
+
+    Mp.setFrame = function (fr) {
+      this.gotoAndStop(Math.round(fr));
+    };
+
+    Mp.addProperty('_frame', Mp.getFrame, Mp.setFrame);
+    Mp.frameTo = function (endframe, duration, animType, delay, callback, extra1, extra2) {
+      if (endframe == undefined) {
+        endframe = this._totalframes;
+      }
+      this.tween('_frame', endframe, duration, animType, delay, callback, extra1, extra2);
+    };
+
+    var TFP = TextField.prototype;
+    if (!TFP.origAddListener) {
+      TFP.origAddListener = TFP.addListener;
+      ASSetPropFlags(TFP, 'origAddListener', 1, 0);
+      TFP.addListener = function () {
+        if (!this._listeners) {
+          AsBroadcaster.initialize(this);
+        }
+        this.origAddListener.apply(this, arguments);
+      };
+
+    }
+    var $_$methods = ['tween', 'stopTween', 'isTweening', 'getTweens', 'lockTween', 'isTweenLocked', 'unlockTween', 'isTweenPaused', 'pauseTween', 'unpauseTween', 'pauseAllTweens', 'unpauseAllTweens', 'stopAllTweens', 'ffTween', 'rewTween', 'getFrame', 'setFrame', '_frame', 'frameTo', 'alphaTo', 'brightnessTo', 'colorTo', 'colorTransformTo', 'invertColorTo', 'tintTo', 'scaleTo', 'sizeTo', 'slideTo', 'rotateTo', 'brightOffsetTo', 'contrastTo'];
+    for (var $_$i in $_$methods) {
+      ASSetPropFlags(Mp, $_$methods[$_$i], 1, 0);
+      if (($_$methods[$_$i].toLowerCase()).indexOf('frame') == -1) {
+        TFP[$_$methods[$_$i]] = Mp[$_$methods[$_$i]];
+        ASSetPropFlags(TFP, $_$methods[$_$i], 1, 0);
+      }
+    }
+    delete Mp;
+    delete TFP;
+    delete $_$methods;
+    delete $_$i;
+    Stage.align = 'TL';
+    Stage.scaleMode = 'noScale';
+    item_i = 0;
+    i_time = 0;
+    btn_gap = 18;
+    btn_height = 16;
+    item_total_num = 0;
+    bcastr_flie_array = new Array();
+    bcastr_link_array = new Array();
+    bcastr_title_array = new Array();
+    container.item_container.id = 0;
+    bcastr_MCL = new MovieClipLoader();
+    bcastr_Listener = new Object();
+    bcastr_MCL.addListener(bcastr_Listener);
+    bcastr_Listener.onLoadError = function () {
+      ++item_i;
+      if (item_i < item_total_num) {
+        load_item();
+      }
+    };
+
+    bcastr_MCL.onLoadInit = function (targetMC) {
+      trace(targetMC);
+      if (bcastr_link_array[item_i] != undefined and bcastr_link_array[item_i] != '') {
+        num_bar['num_btn' + item_i].onPress = function () {
+          this.bg.colorTo(16777215, 0);
+          this.bg.colorTo(btn_over_color, 0.8, 'easeOutQuint');
+        };
+
+        num_bar['num_btn' + item_i].onRelease = function () {
+          getURL(bcastr_link_array[this.id], '_blank');
+        };
+
+      }
+      targetMC._lockroot = true;
+      targetMC.stop();
+      if (item_i == 0) {
+        item_focus.id = 0;
+        _root.item_focus = _root.container.item_container0;
+        _root.item_focus.onEnterFrame = function () {
+          if (_root.btn_bar_complete == 1) {
+            _root.num_bar.num_btn0.onRollOver();
+            delete _root.item_focus.onEnterFrame;
+          }
+        };
+
+      }
+      num_bar['num_btn' + item_i].onRollOver = function () {
+        _root.bright_transform(container['item_container' + this.id], this.id);
+      };
+
+      ++item_i;
+      if (item_i < item_total_num) {
+        load_item();
+      }
+    };
+
+    bcastr_MCL.onLoadComplete = function (targetMC) {};
+
+    bcastr_MCL.onLoadStart = function (targetMC) {
+      var v1 = bcastr_MCL.getProgress(targetMC);
+    };
+
+    bcastr_MCL.onLoadProgress = function (targetMC, loadedBytes, totalBytes) {
+      num_bar['num_btn' + item_i].loading_bar.tween('_width', (loadedBytes / totalBytes) * btn_height, 0.2);
+      if (loadedBytes / totalBytes == 1) {
+        num_bar['num_btn' + item_i].loading_bar.alphaTo(0);
+        num_bar['num_btn' + item_i].bg.alphaTo(50);
+      }
+    };
+
+    var myListener = new Object();
+    myListener.onResize = function () {
+      setlayout();
+    };
+
+    Stage.addListener(myListener);
+    if (bcastr_xml_url == undefined) {
+      bcastr_xml_url = 'bcastr.xml';
+    }
+    if (bcastr_flie != undefined) {
+      setConfig();
+      bcastr_flie_array = bcastr_flie.split('|');
+      item_total_num = bcastr_flie_array.length;
+      bcastr_link_array = bcastr_link.split('|');
+      bcastr_title_array = bcastr_title.split('|');
+      set_num_bar();
+      auto_play();
+      load_item();
+      setlayout('first');
+    } else {
+      bcastr_xml = new XML();
+      bcastr_xml.ignoreWhite = true;
+      bcastr_xml.load(bcastr_xml_url);
+      bcastr_xml.onLoad = function (success) {
+        config = bcastr_xml.firstChild.attributes.config;
+        trace(config);
+        setConfig();
+        item_total_num = bcastr_xml.firstChild.childNodes.length;
+        if (bcastr_xml.firstChild.attributes.autoPlayTime != undefined) {
+        }
+        i = 0;
+        while (i < item_total_num) {
+          bcastr_flie_array.push(bcastr_xml.firstChild.childNodes[i].attributes.item_url);
+          bcastr_title_array.push(bcastr_xml.firstChild.childNodes[i].attributes.itemtitle);
+          bcastr_link_array.push(bcastr_xml.firstChild.childNodes[i].attributes.link);
+          ++i;
+        }
+        set_num_bar();
+        setlayout('first');
+        load_item();
+        auto_play();
+      };
+
+    }
+  }
+
+  movieClip 9  {
+  }
+
+  movieClip 10  {
+  }
+
+  movieClip 13  {
+
+    frame 1 {
+    }
+  }
+
+  movieClip 14 __Packages.com.robertpenner.easing.Quad {
+
+    #initclip
+      if (!_global.com) {
+        _global.com = new Object();
+      }
+      if (!_global.com.robertpenner) {
+        _global.com.robertpenner = new Object();
+      }
+      if (!_global.com.robertpenner.easing) {
+        _global.com.robertpenner.easing = new Object();
+      }
+      if (!_global.com.robertpenner.easing.Quad) {
+        var v1 = function () {};
+
+        com.robertpenner.easing.Quad = v1;
+        var v2 = v1.prototype;
+        v1.easeIn = function (t, b, c, d) {
+          t /= d;
+          return c * t * t + b;
+        };
+
+        v1.easeOut = function (t, b, c, d) {
+          t /= d;
+          return -c * t * (t - 2) + b;
+        };
+
+        v1.easeInOut = function (t, b, c, d) {
+          t /= d / 2;
+          if (t < 1) {
+            return (c / 2) * t * t + b;
+          }
+          return (-c / 2) * (--t * (t - 2) - 1) + b;
+        };
+
+        v1.easeOutIn = function (t, b, c, d) {
+          t /= d / 2;
+          if (t < 1) {
+            return (-c / 2) * (--t * t - 1) + b;
+          }
+          return (c / 2) * (--t * t + 1) + b;
+        };
+
+        ASSetPropFlags(com.robertpenner.easing.Quad.prototype, null, 1);
+      }
+    #endinitclip
+  }
+
+  movieClip 15 __Packages.com.robertpenner.easing.Circ {
+
+    #initclip
+      if (!_global.com) {
+        _global.com = new Object();
+      }
+      if (!_global.com.robertpenner) {
+        _global.com.robertpenner = new Object();
+      }
+      if (!_global.com.robertpenner.easing) {
+        _global.com.robertpenner.easing = new Object();
+      }
+      if (!_global.com.robertpenner.easing.Circ) {
+        var v1 = function () {};
+
+        com.robertpenner.easing.Circ = v1;
+        var v2 = v1.prototype;
+        v1.easeIn = function (t, b, c, d) {
+          t /= d;
+          return -c * (Math.sqrt(1 - t * t) - 1) + b;
+        };
+
+        v1.easeOut = function (t, b, c, d) {
+          t = t / d - 1;
+          return c * Math.sqrt(1 - t * t) + b;
+        };
+
+        v1.easeInOut = function (t, b, c, d) {
+          t /= d / 2;
+          if (t < 1) {
+            return (-c / 2) * (Math.sqrt(1 - t * t) - 1) + b;
+          }
+          t -= 2;
+          return (c / 2) * (Math.sqrt(1 - t * t) + 1) + b;
+        };
+
+        v1.easeOutIn = function (t, b, c, d) {
+          t /= d / 2;
+          if (t < 1) {
+            return (c / 2) * Math.sqrt(1 - --t * t) + b;
+          }
+          return (c / 2) * (2 - Math.sqrt(1 - --t * t)) + b;
+        };
+
+        ASSetPropFlags(com.robertpenner.easing.Circ.prototype, null, 1);
+      }
+    #endinitclip
+  }
+
+  movieClip 16 __Packages.com.robertpenner.easing.Quart {
+
+    #initclip
+      if (!_global.com) {
+        _global.com = new Object();
+      }
+      if (!_global.com.robertpenner) {
+        _global.com.robertpenner = new Object();
+      }
+      if (!_global.com.robertpenner.easing) {
+        _global.com.robertpenner.easing = new Object();
+      }
+      if (!_global.com.robertpenner.easing.Quart) {
+        var v1 = function () {};
+
+        com.robertpenner.easing.Quart = v1;
+        var v2 = v1.prototype;
+        v1.easeIn = function (t, b, c, d) {
+          t /= d;
+          return c * t * t * t * t + b;
+        };
+
+        v1.easeOut = function (t, b, c, d) {
+          t = t / d - 1;
+          return -c * (t * t * t * t - 1) + b;
+        };
+
+        v1.easeInOut = function (t, b, c, d) {
+          t /= d / 2;
+          if (t < 1) {
+            return (c / 2) * t * t * t * t + b;
+          }
+          t -= 2;
+          return (-c / 2) * (t * t * t * t - 2) + b;
+        };
+
+        v1.easeOutIn = function (t, b, c, d) {
+          t /= d / 2;
+          if (t < 1) {
+            return (-c / 2) * (--t * t * t * t - 1) + b;
+          }
+          return (c / 2) * (--t * t * t * t + 1) + b;
+        };
+
+        ASSetPropFlags(com.robertpenner.easing.Quart.prototype, null, 1);
+      }
+    #endinitclip
+  }
+
+  movieClip 17 __Packages.com.robertpenner.easing.Sine {
+
+    #initclip
+      if (!_global.com) {
+        _global.com = new Object();
+      }
+      if (!_global.com.robertpenner) {
+        _global.com.robertpenner = new Object();
+      }
+      if (!_global.com.robertpenner.easing) {
+        _global.com.robertpenner.easing = new Object();
+      }
+      if (!_global.com.robertpenner.easing.Sine) {
+        var v1 = function () {};
+
+        com.robertpenner.easing.Sine = v1;
+        var v2 = v1.prototype;
+        v1.easeIn = function (t, b, c, d) {
+          return -c * Math.cos((t / d) * 1.570796326794897) + c + b;
+        };
+
+        v1.easeOut = function (t, b, c, d) {
+          return c * Math.sin((t / d) * 1.570796326794897) + b;
+        };
+
+        v1.easeInOut = function (t, b, c, d) {
+          return (-c / 2) * (Math.cos(Math.PI * t / d) - 1) + b;
+        };
+
+        v1.easeOutIn = function (t, b, c, d) {
+          t /= d / 2;
+          if (t < 1) {
+            return (c / 2) * Math.sin(Math.PI * t / 2) + b;
+          }
+          return (-c / 2) * (Math.cos(Math.PI * --t / 2) - 2) + b;
+        };
+
+        ASSetPropFlags(com.robertpenner.easing.Sine.prototype, null, 1);
+      }
+    #endinitclip
+  }
+
+  movieClip 18 __Packages.com.robertpenner.easing.Back {
+
+    #initclip
+      if (!_global.com) {
+        _global.com = new Object();
+      }
+      if (!_global.com.robertpenner) {
+        _global.com.robertpenner = new Object();
+      }
+      if (!_global.com.robertpenner.easing) {
+        _global.com.robertpenner.easing = new Object();
+      }
+      if (!_global.com.robertpenner.easing.Back) {
+        var v1 = function () {};
+
+        com.robertpenner.easing.Back = v1;
+        var v2 = v1.prototype;
+        v1.easeIn = function (t, b, c, d, s) {
+          if (s == undefined) {
+            s = 1.70158;
+          }
+          t /= d;
+          return c * t * t * ((s + 1) * t - s) + b;
+        };
+
+        v1.easeOut = function (t, b, c, d, s) {
+          if (s == undefined) {
+            s = 1.70158;
+          }
+          t = t / d - 1;
+          return c * (t * t * ((s + 1) * t + s) + 1) + b;
+        };
+
+        v1.easeInOut = function (t, b, c, d, s) {
+          if (s == undefined) {
+            s = 1.70158;
+          }
+          t /= d / 2;
+          if (t < 1) {
+            s *= 1.525;
+            return (c / 2) * (t * t * ((s + 1) * t - s)) + b;
+          }
+          t -= 2;
+          s *= 1.525;
+          return (c / 2) * (t * t * ((s + 1) * t + s) + 2) + b;
+        };
+
+        v1.easeOutIn = function (t, b, c, d, s) {
+          if (s == undefined) {
+            s = 1.70158;
+          }
+          t /= d / 2;
+          if (t < 1) {
+            s *= 1.525;
+            return (c / 2) * (--t * t * ((s + 1) * t + s) + 1) + b;
+          }
+          s *= 1.525;
+          return (c / 2) * (--t * t * ((s + 1) * t - s) + 1) + b;
+        };
+
+        ASSetPropFlags(com.robertpenner.easing.Back.prototype, null, 1);
+      }
+    #endinitclip
+  }
+
+  movieClip 19 __Packages.com.robertpenner.easing.Quint {
+
+    #initclip
+      if (!_global.com) {
+        _global.com = new Object();
+      }
+      if (!_global.com.robertpenner) {
+        _global.com.robertpenner = new Object();
+      }
+      if (!_global.com.robertpenner.easing) {
+        _global.com.robertpenner.easing = new Object();
+      }
+      if (!_global.com.robertpenner.easing.Quint) {
+        var v1 = function () {};
+
+        com.robertpenner.easing.Quint = v1;
+        var v2 = v1.prototype;
+        v1.easeIn = function (t, b, c, d) {
+          t /= d;
+          return c * t * t * t * t * t + b;
+        };
+
+        v1.easeOut = function (t, b, c, d) {
+          t = t / d - 1;
+          return c * (t * t * t * t * t + 1) + b;
+        };
+
+        v1.easeInOut = function (t, b, c, d) {
+          t /= d / 2;
+          if (t < 1) {
+            return (c / 2) * t * t * t * t * t + b;
+          }
+          t -= 2;
+          return (c / 2) * (t * t * t * t * t + 2) + b;
+        };
+
+        v1.easeOutIn = function (t, b, c, d) {
+          t /= d / 2;
+          return (c / 2) * (--t * t * t * t * t + 1) + b;
+        };
+
+        ASSetPropFlags(com.robertpenner.easing.Quint.prototype, null, 1);
+      }
+    #endinitclip
+  }
+
+  movieClip 20 __Packages.com.ruochi.RTools {
+
+    #initclip
+      if (!_global.com) {
+        _global.com = new Object();
+      }
+      if (!_global.com.ruochi) {
+        _global.com.ruochi = new Object();
+      }
+      if (!_global.com.ruochi.RTools) {
+        var v1 = function () {};
+
+        com.ruochi.RTools = v1;
+        var v2 = v1.prototype;
+        v1.SetVisible = function (mc, flag) {
+          mc._visible = flag;
+        };
+
+        v1.SetQuality = function (mc, flag) {
+          mc._quality = flag;
+        };
+
+        v1.stringToFunction = function (str) {
+          str = str.split('(');
+          str[0] = str[0].split('.');
+          str[1] = str[1].split(',');
+          str[1][str[1].length - 1] = (str[1][str[1].length - 1].split(')'))[0];
+          var i = 0;
+          while (i < str[1].length) {
+            if (str[1][i].indexOf(':Number')) {
+              str[1][i] = Number(str[1][i]);
+            } else {
+              if (str[1][i].indexOf(':String')) {
+                str[1][i] = String(str[1][i]);
+              } else {
+                str[1][i] = eval(str[1][i]);
+              }
+            }
+            ++i;
+          }
+          (eval(str[0][str[0].length - 1])).apply(eval((str[0].slice(0, str[0].length - 1)).join('.')), str[1]);
+        };
+
+        v1.limitSlideY = function (mc, x1, x2, y1, y2, top, bottom, speed) {
+          var step;
+          var center;
+          center = (y1 + y2) / 2;
+          mc.onMouseMove = function () {
+            if (mc._parent._xmouse > x1 && mc._parent._xmouse < x2 && mc._parent._ymouse > y1 && mc._parent._ymouse < y2) {
+              mc.onEnterFrame = function () {
+                step = mc._y + (center - mc._parent._ymouse) / speed;
+                if (step >= bottom) {
+                  mc._y = bottom;
+                } else {
+                  if (step <= top) {
+                    mc._y = top;
+                  } else {
+                    mc._y = step;
+                  }
+                }
+              };
+
+            } else {
+              delete mc.onEnterFrame;
+            }
+          };
+
+        };
+
+        v1.setUn = function (A, B) {
+          if (A == undefined || isNaN(A) || A == '') {
+            return B;
+          } else {
+            return A;
+          }
+        };
+
+        ASSetPropFlags(com.ruochi.RTools.prototype, null, 1);
+      }
+    #endinitclip
+  }
+
+  movieClip 21 __Packages.com.robertpenner.easing.Linear {
+
+    #initclip
+      if (!_global.com) {
+        _global.com = new Object();
+      }
+      if (!_global.com.robertpenner) {
+        _global.com.robertpenner = new Object();
+      }
+      if (!_global.com.robertpenner.easing) {
+        _global.com.robertpenner.easing = new Object();
+      }
+      if (!_global.com.robertpenner.easing.Linear) {
+        var v1 = function () {};
+
+        com.robertpenner.easing.Linear = v1;
+        var v2 = v1.prototype;
+        v1.easeNone = function (t, b, c, d) {
+          return c * t / d + b;
+        };
+
+        v1.easeIn = function (t, b, c, d) {
+          return c * t / d + b;
+        };
+
+        v1.easeOut = function (t, b, c, d) {
+          return c * t / d + b;
+        };
+
+        v1.easeInOut = function (t, b, c, d) {
+          return c * t / d + b;
+        };
+
+        v1.easeOutIn = function (t, b, c, d) {
+          return c * t / d + b;
+        };
+
+        ASSetPropFlags(com.robertpenner.easing.Linear.prototype, null, 1);
+      }
+    #endinitclip
+  }
+
+  movieClip 22 __Packages.com.robertpenner.easing.Expo {
+
+    #initclip
+      if (!_global.com) {
+        _global.com = new Object();
+      }
+      if (!_global.com.robertpenner) {
+        _global.com.robertpenner = new Object();
+      }
+      if (!_global.com.robertpenner.easing) {
+        _global.com.robertpenner.easing = new Object();
+      }
+      if (!_global.com.robertpenner.easing.Expo) {
+        var v1 = function () {};
+
+        com.robertpenner.easing.Expo = v1;
+        var v2 = v1.prototype;
+        v1.easeIn = function (t, b, c, d) {
+          return (t == 0) ? b : c * Math.pow(2, 10 * (t / d - 1)) + b;
+        };
+
+        v1.easeOut = function (t, b, c, d) {
+          return (t == d) ? b + c : c * (-Math.pow(2, -10 * t / d) + 1) + b;
+        };
+
+        v1.easeInOut = function (t, b, c, d) {
+          if (t == 0) {
+            return b;
+          }
+          if (t == d) {
+            return b + c;
+          }
+          t /= d / 2;
+          if (t < 1) {
+            return (c / 2) * Math.pow(2, 10 * (t - 1)) + b;
+          }
+          return (c / 2) * (-Math.pow(2, -10 * --t) + 2) + b;
+        };
+
+        v1.easeOutIn = function (t, b, c, d) {
+          if (t == 0) {
+            return b;
+          }
+          if (t == d) {
+            return b + c;
+          }
+          t /= d / 2;
+          if (t < 1) {
+            return (c / 2) * (-Math.pow(2, -10 * t) + 1) + b;
+          }
+          return (c / 2) * (Math.pow(2, 10 * (t - 2)) + 1) + b;
+        };
+
+        ASSetPropFlags(com.robertpenner.easing.Expo.prototype, null, 1);
+      }
+    #endinitclip
+  }
+
+  movieClip 23 __Packages.com.robertpenner.easing.Elastic {
+
+    #initclip
+      if (!_global.com) {
+        _global.com = new Object();
+      }
+      if (!_global.com.robertpenner) {
+        _global.com.robertpenner = new Object();
+      }
+      if (!_global.com.robertpenner.easing) {
+        _global.com.robertpenner.easing = new Object();
+      }
+      if (!_global.com.robertpenner.easing.Elastic) {
+        var v1 = function () {};
+
+        com.robertpenner.easing.Elastic = v1;
+        var v2 = v1.prototype;
+        v1.easeIn = function (t, b, c, d, a, p) {
+          if (t == 0) {
+            return b;
+          }
+          t /= d;
+          if (t == 1) {
+            return b + c;
+          }
+          if (!p) {
+            p = d * 0.3;
+          }
+          if (!a || a < Math.abs(c)) {
+            a = c;
+            var v7 = p / 4;
+            t -= 1;
+            return -(a * Math.pow(2, 10 * t) * Math.sin((t * d - v7) * 6.283185307179586 / p)) + b;
+          }
+          v7 = (p / 6.283185307179586) * Math.asin(c / a);
+          t -= 1;
+          return -(a * Math.pow(2, 10 * t) * Math.sin((t * d - v7) * 6.283185307179586 / p)) + b;
+        };
+
+        v1.easeOut = function (t, b, c, d, a, p) {
+          if (t == 0) {
+            return b;
+          }
+          t /= d;
+          if (t == 1) {
+            return b + c;
+          }
+          if (!p) {
+            p = d * 0.3;
+          }
+          if (!a || a < Math.abs(c)) {
+            a = c;
+            var v7 = p / 4;
+            return a * Math.pow(2, -10 * t) * Math.sin((t * d - v7) * 6.283185307179586 / p) + c + b;
+          }
+          v7 = (p / 6.283185307179586) * Math.asin(c / a);
+          return a * Math.pow(2, -10 * t) * Math.sin((t * d - v7) * 6.283185307179586 / p) + c + b;
+        };
+
+        v1.easeInOut = function (t, b, c, d, a, p) {
+          if (t == 0) {
+            return b;
+          }
+          t /= d / 2;
+          if (t == 2) {
+            return b + c;
+          }
+          if (!p) {
+            p = d * 0.45;
+          }
+          if (!a || a < Math.abs(c)) {
+            a = c;
+            var v7 = p / 4;
+          } else {
+            var v7 = (p / 6.283185307179586) * Math.asin(c / a);
+          }
+          if (t < 1) {
+            t -= 1;
+            return -0.5 * (a * Math.pow(2, 10 * t) * Math.sin((t * d - v7) * 6.283185307179586 / p)) + b;
+          }
+          t -= 1;
+          return a * Math.pow(2, -10 * t) * Math.sin((t * d - v7) * 6.283185307179586 / p) * 0.5 + c + b;
+        };
+
+        v1.easeOutIn = function (t, b, c, d, a, p) {
+          if (t == 0) {
+            return b;
+          }
+          t /= d / 2;
+          if (t == 2) {
+            return b + c;
+          }
+          if (!p) {
+            p = d * 0.45;
+          }
+          if (!a || a < Math.abs(c)) {
+            a = c;
+            var v7 = p / 4;
+          } else {
+            var v7 = (p / 6.283185307179586) * Math.asin(c / a);
+          }
+          if (t < 1) {
+            return 0.5 * (a * Math.pow(2, -10 * t) * Math.sin((t * d - v7) * 6.283185307179586 / p)) + c / 2 + b;
+          }
+          return c / 2 + 0.5 * (a * Math.pow(2, 10 * (t - 2)) * Math.sin((t * d - v7) * 6.283185307179586 / p)) + b;
+        };
+
+        ASSetPropFlags(com.robertpenner.easing.Elastic.prototype, null, 1);
+      }
+    #endinitclip
+  }
+
+  movieClip 24 __Packages.com.robertpenner.easing.Bounce {
+
+    #initclip
+      if (!_global.com) {
+        _global.com = new Object();
+      }
+      if (!_global.com.robertpenner) {
+        _global.com.robertpenner = new Object();
+      }
+      if (!_global.com.robertpenner.easing) {
+        _global.com.robertpenner.easing = new Object();
+      }
+      if (!_global.com.robertpenner.easing.Bounce) {
+        var v1 = function () {};
+
+        com.robertpenner.easing.Bounce = v1;
+        var v2 = v1.prototype;
+        v1.easeOut = function (t, b, c, d) {
+          t /= d;
+          if (t < 0.3636363636363636) {
+            return c * (7.5625 * t * t) + b;
+          } else {
+            if (t < 0.7272727272727273) {
+              t -= 0.5454545454545454;
+              return c * (7.5625 * t * t + 0.75) + b;
+            } else {
+              if (t < 0.9090909090909091) {
+                t -= 0.8181818181818182;
+                return c * (7.5625 * t * t + 0.9375) + b;
+              } else {
+                t -= 0.9545454545454546;
+                return c * (7.5625 * t * t + 0.984375) + b;
+              }
+            }
+          }
+        };
+
+        v1.easeIn = function (t, b, c, d) {
+          return c - com.robertpenner.easing.Bounce.easeOut(d - t, 0, c, d) + b;
+        };
+
+        v1.easeInOut = function (t, b, c, d) {
+          if (t < d / 2) {
+            return com.robertpenner.easing.Bounce.easeIn(t * 2, 0, c, d) * 0.5 + b;
+          } else {
+            return com.robertpenner.easing.Bounce.easeOut(t * 2 - d, 0, c, d) * 0.5 + c * 0.5 + b;
+          }
+        };
+
+        v1.easeOutIn = function (t, b, c, d) {
+          if (t < d / 2) {
+            return com.robertpenner.easing.Bounce.easeOut(t * 2, 0, c, d) * 0.5 + b;
+          }
+          return com.robertpenner.easing.Bounce.easeIn(t * 2 - d, 0, c, d) * 0.5 + c * 0.5 + b;
+        };
+
+        ASSetPropFlags(com.robertpenner.easing.Bounce.prototype, null, 1);
+      }
+    #endinitclip
+  }
+
+  movieClip 25 __Packages.zigo.tweenManager {
+
+    #initclip
+      if (!_global.zigo) {
+        _global.zigo = new Object();
+      }
+      if (!_global.zigo.tweenManager) {
+        var v1 = function () {
+          this.playing = false;
+          this.autoStop = false;
+          this.broadcastEvents = false;
+          this.autoOverwrite = true;
+          this.ints = new Array();
+          this.lockedTweens = new Object();
+          this.tweenList = new Array();
+        };
+
+        zigo.tweenManager = v1;
+        var v2 = v1.prototype;
+        v2.cleanUp = function () {
+          if (!(this.tweenList instanceof Array && this.tweenList.length > 0)) {
+            return undefined;
+          }
+          for (var v2 in this.tweenList) {
+            if (this.tweenList[v2].mc._x == undefined) {
+              this.tweenList.splice(Number(v2), 1);
+            }
+          }
+          if (this.tweenList.length == 0) {
+            this.tweenList = [];
+            this.deinit();
+          }
+          for (v2 in this.ints) {
+            if (this.ints[v2] != undefined && this.ints[v2].mc._x == undefined) {
+              this.removeDelayedTween(Number(v2));
+            }
+          }
+        };
+
+        v2.__set__updateInterval = function (time) {
+          if (this.playing) {
+            this.deinit();
+            this.updateTime = time;
+            this.init();
+          } else {
+            this.updateTime = time;
+          }
+          return this.__get__updateInterval();
+        };
+
+        v2.__get__updateInterval = function () {
+          return this.updateTime;
+        };
+
+        v2.__set__controllerDepth = function (v) {
+          if (_global.isNaN(v) == true) {
+            return undefined;
+          }
+          if (this.tweenHolder._name != undefined) {
+            this.tweenHolder.swapDepths(v);
+          } else {
+            this._th_depth = v;
+          }
+          return this.__get__controllerDepth();
+        };
+
+        v2.__get__controllerDepth = function () {
+          return this._th_depth;
+        };
+
+        v2.init = function () {
+          if (this.updateTime > 0) {
+            clearInterval(this.updateIntId);
+            this.updateIntId = setInterval(this, 'update', this.updateTime);
+          } else {
+            if (this.tweenHolder._name == undefined) {
+              this.tweenHolder = _root.createEmptyMovieClip('_th_', this._th_depth);
+            }
+            var tm = this;
+            this.tweenHolder.onEnterFrame = function () {
+              tm.update.call(tm);
+            };
+
+          }
+          this.playing = true;
+          this.now = getTimer();
+        };
+
+        v2.deinit = function () {
+          this.playing = false;
+          clearInterval(this.updateIntId);
+          delete this.tweenHolder.onEnterFrame;
+        };
+
+        v2.update = function () {
+          var v2;
+          var v10;
+          var v3;
+          var v13 = false;
+          v10 = this.tweenList.length;
+          if (this.broadcastEvents) {
+            var v4;
+            var v7;
+            var v5;
+            var v9;
+            v4 = {};
+            v7 = {};
+            v5 = {};
+            v9 = {};
+          }
+          while (v10--) {
+            v2 = this.tweenList[v10];
+            if (v2.mc._x == undefined) {
+              v13 = true;
+              continue;
+            }
+            if (v2.pt != -1) {
+              continue;
+            }
+            if (v2.ts + v2.d > this.now) {
+              if (v2.ctm == undefined) {
+                v2.mc[v2.pp] = v2.ef(this.now - v2.ts, v2.ps, v2.ch, v2.d, v2.e1, v2.e2);
+              } else {
+                var v8 = {};
+                for (v3 in v2.ctm) {
+                  v8[v3] = v2.ef(this.now - v2.ts, v2.stm[v3], v2.ctm[v3], v2.d, v2.e1, v2.e2);
+                }
+                v2.c.setTransform(v8);
+              }
+              if (this.broadcastEvents) {
+                if (v4[targetPath(v2.mc)] == undefined) {
+                  v4[targetPath(v2.mc)] = v2.mc;
+                }
+                if (v5[targetPath(v2.mc)] == undefined) {
+                  v5[targetPath(v2.mc)] = [];
+                }
+                v5[targetPath(v2.mc)].push((v2.ctm != undefined) ? '_ct_' : v2.pp);
+              }
+              if (v2.cb.updfunc != undefined) {
+                var v6 = v2.cb.updfunc;
+                if (typeof v6 == 'string' && v2.cb.updscope != undefined) {
+                  v6 = v2.cb.updscope[v6];
+                }
+                v6.apply(v2.cb.updscope, v2.cb.updargs);
+              }
+            } else {
+              if (v2.ctm == undefined) {
+                v2.mc[v2.pp] = v2.ps + v2.ch;
+              } else {
+                var v8 = {};
+                for (v3 in v2.ctm) {
+                  v8[v3] = v2.stm[v3] + v2.ctm[v3];
+                }
+                v2.c.setTransform(v8);
+              }
+              if (this.broadcastEvents) {
+                if (v4[targetPath(v2.mc)] == undefined) {
+                  v4[targetPath(v2.mc)] = v2.mc;
+                }
+                if (v7[targetPath(v2.mc)] == undefined) {
+                  v7[targetPath(v2.mc)] = v2.mc;
+                }
+                if (v5[targetPath(v2.mc)] == undefined) {
+                  v5[targetPath(v2.mc)] = [];
+                }
+                v5[targetPath(v2.mc)].push((v2.ctm != undefined) ? '_ct_' : v2.pp);
+                if (v9[targetPath(v2.mc)] == undefined) {
+                  v9[targetPath(v2.mc)] = [];
+                }
+                v9[targetPath(v2.mc)].push((v2.ctm != undefined) ? '_ct_' : v2.pp);
+              }
+              if (v2.cb.updfunc != undefined) {
+                var v6 = v2.cb.updfunc;
+                if (typeof v6 == 'string' && v2.cb.updscope != undefined) {
+                  v6 = v2.cb.updscope[v6];
+                }
+                v6.updfunc.apply(v2.cb.updscope, v2.cb.updargs);
+              }
+              if (endt == undefined) {
+                var endt = new Array();
+              }
+              endt.push(v10);
+            }
+          }
+          if (v13) {
+            this.cleanUp();
+          }
+          for (v3 in v4) {
+            v4[v3].broadcastMessage('onTweenUpdate', {'target': v4[v3], 'props': v5[v3]});
+          }
+          if (endt != undefined) {
+            this.endTweens(endt);
+          }
+          for (v3 in v7) {
+            v7[v3].broadcastMessage('onTweenEnd', {'target': v7[v3], 'props': v9[v3]});
+          }
+          this.now = getTimer();
+          if (this.updateTime > 0) {
+            updateAfterEvent();
+          }
+        };
+
+        v2.endTweens = function (tid_arr) {
+          var v2;
+          var v9;
+          var v3;
+          var v5;
+          var v8;
+          v2 = [];
+          v9 = tid_arr.length;
+          v3 = 0;
+          while (v3 < v9) {
+            v5 = this.tweenList[tid_arr[v3]].cb;
+            if (v5 != undefined) {
+              var v6 = true;
+              for (v8 in v2) {
+                if (v2[v8] == v5) {
+                  v6 = false;
+                  break;
+                }
+              }
+                            if (v6) {
+                v2.push(v5);
+              }
+            }
+            this.tweenList.splice(tid_arr[v3], 1);
+            ++v3;
+          }
+          v3 = 0;
+          while (v3 < v2.length) {
+            var v4 = v2[v3].func;
+            if (typeof v4 == 'string' && v2[v3].scope != undefined) {
+              v4 = v2[v3].scope[v4];
+            }
+            v4.apply(v2[v3].scope, v2[v3].args);
+            ++v3;
+          }
+          if (this.tweenList.length == 0) {
+            this.deinit();
+          }
+        };
+
+        v2.removeDelayedTween = function (index) {
+          clearInterval(this.ints[index].intid);
+          this.ints[index] = undefined;
+          var v2 = true;
+          for (var v3 in this.ints) {
+            if (this.ints[v3] != undefined) {
+              v2 = false;
+              break;
+            }
+          }
+                    if (v2) {
+            this.ints = [];
+          }
+        };
+
+        v2.addTween = function (mc, props, pEnd, sec, eqFunc, callback, extra1, extra2) {
+          var v4;
+          var v13;
+          var v6;
+          var v3;
+          var v2;
+          if (!this.playing) {
+            this.init();
+          }
+          var v12 = [];
+          for (v4 in props) {
+            v13 = props[v4];
+            v6 = true;
+            if (v13.substr(0, 4) != '_ct_') {
+              var v17 = (typeof pEnd[v4] == 'string') ? Number(pEnd[v4]) : pEnd[v4] - mc[v13];
+              if (this.autoOverwrite) {
+                for (v3 in this.tweenList) {
+                  v2 = this.tweenList[v3];
+                  if (v2.mc == mc && v2.pp == v13) {
+                    v2.ps = mc[v13];
+                    v2.ch = v17;
+                    v2.ts = this.now;
+                    v2.d = sec * 1000;
+                    v2.ef = eqFunc;
+                    v2.cb = callback;
+                    v2.e1 = extra1;
+                    v2.e2 = extra2;
+                    v2.pt = -1;
+                    v6 = false;
+                    v12.push(v2.pp);
+                    break;
+                  }
+                }
+                              }
+              if (v6) {
+                this.tweenList.unshift({'mc': mc, 'pp': v13, 'ps': mc[v13], 'ch': v17, 'ts': this.now, 'd': sec * 1000, 'ef': eqFunc, 'cb': callback, 'e1': extra1, 'e2': extra2, 'pt': -1});
+              }
+            } else {
+              var v16 = new Color(mc);
+              var v20 = v16.getTransform();
+              var v19 = {};
+              for (v3 in pEnd[v4]) {
+                if (pEnd[v4][v3] != v20[v3] && pEnd[v4][v3] != undefined) {
+                  v19[v3] = (typeof pEnd[v4][v3] == 'string') ? v20[v3] + Number(pEnd[v4][v3]) : pEnd[v4][v3] - v20[v3];
+                }
+              }
+              if (this.autoOverwrite) {
+                for (v3 in this.tweenList) {
+                  v2 = this.tweenList[v3];
+                  if (v2.mc == mc && v2.ctm != undefined) {
+                    v2.c = v16;
+                    v2.stm = v20;
+                    v2.ctm = v19;
+                    v2.ts = this.now;
+                    v2.d = sec * 1000;
+                    v2.ef = eqFunc;
+                    v2.cb = callback;
+                    v2.e1 = extra1;
+                    v2.e2 = extra2;
+                    v2.pt = -1;
+                    v6 = false;
+                    v12.push('_ct_');
+                    break;
+                  }
+                }
+                              }
+              if (v6) {
+                this.tweenList.unshift({'mc': mc, 'c': v16, 'stm': v20, 'ctm': v19, 'ts': this.now, 'd': sec * 1000, 'ef': eqFunc, 'cb': callback, 'e1': extra1, 'e2': extra2, 'pt': -1});
+              }
+            }
+          }
+          if (this.broadcastEvents) {
+            if (v12.length > 0) {
+              mc.broadcastMessage('onTweenInterrupt', {'target': mc, 'props': v12});
+            }
+            mc.broadcastMessage('onTweenStart', {'target': mc, 'props': props});
+          }
+          if (callback.startfunc != undefined) {
+            var v27 = callback.startfunc;
+            if (typeof v27 == 'string' && callback.startscope != undefined) {
+              v27 = callback.startscope[v27];
+            }
+            v27.apply(callback.startscope, callback.startargs);
+          }
+          if (sec == 0) {
+            this.update();
+          }
+        };
+
+        v2.addTweenWithDelay = function (delay, mc, props, pEnd, sec, eqFunc, callback, extra1, extra2) {
+          var il;
+          var v3;
+          il = this.ints.length;
+          v3 = setInterval(function (obj) {
+            obj.removeDelayedTween(il);
+            if (mc._x != undefined) {
+              obj.addTween(mc, props, pEnd, sec, eqFunc, callback, extra1, extra2);
+            }
+          }, delay * 1000, this);
+          this.ints[il] = {'mc': mc, 'props': props, 'pend': pEnd, 'intid': v3, 'st': getTimer(), 'delay': delay * 1000, 'args': arguments.slice(1), 'pt': -1};
+          if (!this.playing) {
+            this.init();
+          }
+        };
+
+        v2.removeTween = function (mc, props) {
+          var v8;
+          var v2;
+          var v5;
+          v8 = false;
+          if (props == undefined && this.broadcastEvents != true) {
+            v8 = true;
+          }
+          v2 = this.tweenList.length;
+          var v4 = {};
+          while (v2--) {
+            if (this.tweenList[v2].mc == mc) {
+              if (v8) {
+                this.tweenList.splice(v2, 1);
+              } else {
+                for (v5 in props) {
+                  if (this.tweenList[v2].pp == props[v5]) {
+                    this.tweenList.splice(v2, 1);
+                    if (v4[targetPath(mc)] == undefined) {
+                      v4[targetPath(mc)] = {'t': mc, 'p': []};
+                    }
+                    v4[targetPath(mc)].p.push(props[v5]);
+                  } else {
+                    if (props[v5] == '_ct_' && this.tweenList[v2].ctm != undefined && this.tweenList[v2].mc == mc) {
+                      this.tweenList.splice(v2, 1);
+                      if (v4[targetPath(mc)] == undefined) {
+                        v4[targetPath(mc)] = {'t': mc, 'p': []};
+                      }
+                      v4[targetPath(mc)].p.push('_ct_');
+                    }
+                  }
+                }
+              }
+            }
+          }
+          v2 = this.ints.length;
+          while (v2--) {
+            if (this.ints[v2].mc == mc) {
+              if (v8) {
+                this.removeDelayedTween(Number(v2));
+              } else {
+                for (v5 in props) {
+                  for (var v11 in this.ints[v2].props) {
+                    if (this.ints[v2].props[v11] == props[v5]) {
+                      this.ints[v2].props.splice(v11, 1);
+                      this.ints[v2].pend.splice(v11, 1);
+                      if (v4[targetPath(mc)] == undefined) {
+                        v4[targetPath(mc)] = {'t': mc, 'p': []};
+                      }
+                      v4[targetPath(mc)].p.push(props[v5]);
+                    }
+                  }
+                  if (this.ints[v2].props.length == 0) {
+                    clearInterval(this.ints[v2].intid);
+                  }
+                }
+              }
+            }
+          }
+          if (this.broadcastEvents) {
+            for (v11 in v4) {
+              if (v4[v11].p.length > 0) {
+                v4[v11].t.broadcastMessage('onTweenInterrupt', {'target': v4[v11].t, 'props': v4[v11].p});
+              }
+            }
+          }
+          if (this.tweenList.length == 0) {
+            this.deinit();
+          }
+        };
+
+        v2.isTweening = function (mc, prop) {
+          var v4 = prop == undefined;
+          for (var v6 in this.tweenList) {
+            var v2 = this.tweenList[v6];
+            if (this.tweenList[v6].mc == mc && this.tweenList[v6].pt == -1 && (v4 || prop == v2.pp || prop == '_ct_' && v2.ctm != undefined)) {
+                            return true;
+            }
+          }
+          return false;
+        };
+
+        v2.getTweens = function (mc) {
+          var v2 = 0;
+          for (var v4 in this.tweenList) {
+            if (this.tweenList[v4].mc == mc) {
+              ++v2;
+            }
+          }
+          return v2;
+        };
+
+        v2.lockTween = function (mc, bool) {
+          this.lockedTweens[targetPath(mc)] = bool;
+        };
+
+        v2.isTweenLocked = function (mc) {
+          if (this.lockedTweens[targetPath(mc)] == undefined) {
+            return false;
+          } else {
+            return this.lockedTweens[targetPath(mc)];
+          }
+        };
+
+        v2.ffTween = function (mc, propsObj) {
+          var v4 = mc == undefined;
+          var v6 = propsObj == undefined;
+          for (var v8 in this.tweenList) {
+            var v2 = this.tweenList[v8];
+            if ((v2.mc == mc || v4) && (v6 || propsObj[v2.pp] == true)) {
+              if (v2.pt != -1) {
+                v2.pt = -1;
+              }
+              v2.ts = this.now - v2.d;
+            }
+          }
+          for (v8 in this.ints) {
+            if (this.ints[v8] != undefined) {
+              if (this.ints[v8].mc == mc || v4) {
+                if (this.ints[v8].mc._x != undefined) {
+                  var v3 = this.ints[v8].args;
+                  v3[3] = 0;
+                  this.addTween.apply(this, v3);
+                }
+                this.removeDelayedTween(Number(v8));
+              }
+            }
+          }
+          this.update();
+        };
+
+        v2.rewTween = function (mc, propsObj) {
+          var v3 = mc == undefined;
+          var v5 = propsObj == undefined;
+          for (var v7 in this.tweenList) {
+            var v2 = this.tweenList[v7];
+            if ((v2.mc == mc || v3) && (v5 || propsObj[v2.pp] == true)) {
+              if (v2.pt != -1) {
+                v2.pt = -1;
+              }
+              v2.ts = this.now;
+            }
+          }
+          for (v7 in this.ints) {
+            if (this.ints[v7] != undefined) {
+              if (this.ints[v7].mc == mc || v3) {
+                if (this.ints[v7].mc._x != undefined) {
+                  this.addTween.apply(this, this.ints[v7].args);
+                }
+                this.removeDelayedTween(Number(v7));
+              }
+            }
+          }
+          this.update();
+        };
+
+        v2.isTweenPaused = function (mc, prop) {
+          if (mc == undefined) {
+            return null;
+          }
+          var v5 = prop == undefined;
+          for (var v6 in this.tweenList) {
+            var v2 = this.tweenList[v6];
+            if (this.tweenList[v6].mc == mc && (v5 || prop == v2.pp || prop == '_ct_' && v2.ctm != undefined)) {
+                            return Boolean(this.tweenList[v6].pt != -1);
+            }
+          }
+          for (v6 in this.ints) {
+            if (this.ints[v6] != undefined && this.ints[v6].mc == mc) {
+                            return Boolean(this.ints[v6].pt != -1);
+            }
+          }
+          return false;
+        };
+
+        v2.pauseTween = function (mc, propsObj) {
+          var v3 = mc == undefined;
+          if (v3 == false && this.isTweenPaused(mc) == true) {
+            return undefined;
+          }
+          var v6 = propsObj == undefined;
+          for (var v7 in this.tweenList) {
+            var v2 = this.tweenList[v7];
+            if (v2.pt == -1 && (v2.mc == mc || v3) && (v6 || propsObj[v2.pp] == true || propsObj._ct_ != undefined && v2.ctm != undefined)) {
+              v2.pt = this.now;
+            }
+          }
+          for (v7 in this.ints) {
+            if (this.ints[v7] != undefined) {
+              if (this.ints[v7].pt == -1 && (this.ints[v7].mc == mc || v3)) {
+                this.ints[v7].pt = this.now;
+              }
+            }
+          }
+        };
+
+        v2.unpauseTween = function (mc, propsObj) {
+          var v4 = mc == undefined;
+          if (v4 == false && this.isTweenPaused(mc) === false) {
+            return undefined;
+          }
+          var v7 = propsObj == undefined;
+          if (!this.playing) {
+            this.init();
+          }
+          for (var v2 in this.tweenList) {
+            var v3 = this.tweenList[v2];
+            if (v3.pt != -1 && (v3.mc == mc || v4) && (v7 || propsObj[v3.pp] == true) || propsObj._ct_ != undefined && v3.ctm != undefined) {
+              v3.ts = this.now - (v3.pt - v3.ts);
+              v3.pt = -1;
+            }
+          }
+          for (v2 in this.ints) {
+            if (this.ints[v2] != undefined) {
+              if (this.ints[v2].pt != -1 && (this.ints[v2].mc == mc || v4)) {
+                this.ints[v2].delay -= this.ints[v2].pt - this.ints[v2].st;
+                this.ints[v2].st = this.now;
+                this.ints[v2].intid = setInterval(function (obj, id) {
+                  obj.addTween.apply(obj, obj.ints[id].args);
+                  clearInterval(obj.ints[id].intid);
+                  obj.ints[id] = undefined;
+                }, this.ints[v2].delay, this, v2);
+              }
+            }
+          }
+        };
+
+        v2.pauseAll = function () {
+          this.pauseTween();
+        };
+
+        v2.unpauseAll = function () {
+          this.unpauseTween();
+        };
+
+        v2.stopAll = function () {
+          for (var v2 in this.ints) {
+            this.removeDelayedTween(Number(v2));
+          }
+          this.tweenList = new Array();
+          this.deinit();
+        };
+
+        v2.toString = function () {
+          return '[AS2 tweenManager 1.2.0]';
+        };
+
+        v2._th_depth = 6789;
+        v2.addProperty('controllerDepth', v2.__get__controllerDepth, v2.__set__controllerDepth);
+        v2.addProperty('updateInterval', v2.__get__updateInterval, v2.__set__updateInterval);
+        ASSetPropFlags(zigo.tweenManager.prototype, null, 1);
+      }
+    #endinitclip
+  }
+
+  movieClip 26 __Packages.com.robertpenner.easing.Cubic {
+
+    #initclip
+      if (!_global.com) {
+        _global.com = new Object();
+      }
+      if (!_global.com.robertpenner) {
+        _global.com.robertpenner = new Object();
+      }
+      if (!_global.com.robertpenner.easing) {
+        _global.com.robertpenner.easing = new Object();
+      }
+      if (!_global.com.robertpenner.easing.Cubic) {
+        var v1 = function () {};
+
+        com.robertpenner.easing.Cubic = v1;
+        var v2 = v1.prototype;
+        v1.easeIn = function (t, b, c, d) {
+          t /= d;
+          return c * t * t * t + b;
+        };
+
+        v1.easeOut = function (t, b, c, d) {
+          t = t / d - 1;
+          return c * (t * t * t + 1) + b;
+        };
+
+        v1.easeInOut = function (t, b, c, d) {
+          t /= d / 2;
+          if (t < 1) {
+            return (c / 2) * t * t * t + b;
+          }
+          t -= 2;
+          return (c / 2) * (t * t * t + 2) + b;
+        };
+
+        v1.easeOutIn = function (t, b, c, d) {
+          t /= d / 2;
+          return (c / 2) * (--t * t * t + 1) + b;
+        };
+
+        ASSetPropFlags(com.robertpenner.easing.Cubic.prototype, null, 1);
+      }
+    #endinitclip
+  }
+}

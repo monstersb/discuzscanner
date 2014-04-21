@@ -1,0 +1,1 @@
+{"program":"discuz", "source":true, "detector":"Aduit", "basis":"keyword", "keyword":"if\\(empty\\(\\$_GET\\['view'\\]\\)\\) \\$_GET\\['view'\\] = 'we'\\;", "type":"Reflective XSS", "severity":"Medium", "url":"source/include/space/space_reward.php", "payload":"", "description":"if (empty($_GET['view']) ", "suggestion":"update", "file":"source/include/space/space_reward.php"}

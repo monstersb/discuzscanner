@@ -1,0 +1,1 @@
+{"program":"discuz", "detector":"Accurate", "method":"get", "cookies":false, "headers":false, "md5":"2b1822a9f0894d863d1eb61861623711", "type":"Flass XSS", "severity":"Medium", "url":"static/image/common/cam.swf?config=http://unikone.github.io/dz.cam.xml&albumid=080", "payload":"", "description":"", "suggestion":"update", "file":"static/image/common/cam.swf"}

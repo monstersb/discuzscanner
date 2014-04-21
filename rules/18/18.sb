@@ -1,0 +1,1 @@
+{"program":"discuz", "source":true, "detector":"Aduit", "basis":"keyword", "keyword":"^[^\\(]+loadcache", "type":"Information Leakage", "severity":"Low", "url":"source/include/misc/misc_ranklist_index.php", "payload":"", "description":"", "suggestion":"update", "file":"source/include/misc/misc_ranklist_index.php"}

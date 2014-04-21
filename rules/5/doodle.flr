@@ -1,0 +1,392 @@
+movie 'rules/5/doodle.swf' {
+// flash 9, total frames: 1, frame rate: 24 fps, 438x304 px, compressed, network access alowed
+
+  metadata <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"> <rdf:Description rdf:about="" xmlns:xmp="http://ns.adobe.com/xap/1.0/"> <xmp:CreatorTool>Adobe Flash CS4 Professional</xmp:CreatorTool> <xmp:CreateDate>2009-06-12T15:02:30+08:00</xmp:CreateDate> <xmp:MetadataDate>2010-06-10T16:20:30+08:00</xmp:MetadataDate> <xmp:ModifyDate>2010-06-10T16:20:30+08:00</xmp:ModifyDate> </rdf:Description> <rdf:Description rdf:about="" xmlns:dc="http://purl.org/dc/elements/1.1/"> <dc:format>application/x-shockwave-flash</dc:format> </rdf:Description> <rdf:Description rdf:about="" xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" xmlns:stRef="http://ns.adobe.com/xap/1.0/sType/ResourceRef#"> <xmpMM:InstanceID>xmp.iid:BE0046F26774DF11B835EF5196C5532D</xmpMM:InstanceID> <xmpMM:DocumentID>xmp.did:BE0046F26774DF11B835EF5196C5532D</xmpMM:DocumentID> <xmpMM:OriginalDocumentID>xmp.did:1A95A5A21D57DE11AAC8C6ED13EC4493</xmpMM:OriginalDocumentID> <xmpMM:DerivedFrom rdf:parseType="Resource"> <stRef:instanceID>xmp.iid:1A95A5A21D57DE11AAC8C6ED13EC4493</stRef:instanceID> <stRef:documentID>xmp.did:1A95A5A21D57DE11AAC8C6ED13EC4493</stRef:documentID> <stRef:originalDocumentID>xmp.did:1A95A5A21D57DE11AAC8C6ED13EC4493</stRef:originalDocumentID> </xmpMM:DerivedFrom> </rdf:Description> </rdf:RDF> 
+  
+  // unknown tag 86 length 12
+
+  movieClip 3  {
+  }
+
+  movieClip 6  {
+  }
+
+  movieClip 7  {
+  }
+
+  movieClip 8  {
+  }
+
+  movieClip 10  {
+  }
+
+  movieClip 12  {
+  }
+
+  movieClip 13  {
+  }
+
+  movieClip 15  {
+  }
+
+  movieClip 17  {
+  }
+
+  movieClip 19  {
+  }
+
+  movieClip 21  {
+  }
+
+  movieClip 23  {
+  }
+
+  movieClip 25  {
+  }
+
+  movieClip 27  {
+  }
+
+  movieClip 29  {
+  }
+
+  movieClip 31  {
+  }
+
+  movieClip 33  {
+  }
+
+  movieClip 35  {
+  }
+
+  movieClip 37  {
+  }
+
+  movieClip 40  {
+  }
+
+  movieClip 42  {
+  }
+
+  movieClip 45  {
+  }
+
+  movieClip 48  {
+  }
+
+  movieClip 51  {
+  }
+
+  movieClip 54  {
+  }
+
+  movieClip 57  {
+  }
+
+  movieClip 60  {
+  }
+
+  movieClip 63  {
+  }
+
+  movieClip 66  {
+  }
+
+  movieClip 69  {
+  }
+
+  movieClip 72  {
+  }
+
+  movieClip 75  {
+  }
+
+  movieClip 78  {
+  }
+
+  movieClip 81  {
+  }
+
+  movieClip 84  {
+  }
+
+  movieClip 87  {
+  }
+
+  movieClip 89  {
+  }
+
+  movieClip 90  {
+  }
+
+  movieClip 92  {
+  }
+
+  movieClip 94  {
+  }
+
+  movieClip 96  {
+  }
+
+  movieClip 98  {
+  }
+
+  movieClip 100  {
+  }
+
+  movieClip 102  {
+  }
+
+  movieClip 104  {
+  }
+
+  movieClip 106  {
+  }
+
+  movieClip 108  {
+  }
+
+  movieClip 110  {
+  }
+
+  movieClip 111  {
+  }
+
+  movieClip 120  {
+  }
+
+  movieClip 122  {
+  }
+
+  movieClip 124  {
+  }
+
+  movieClip 126  {
+  }
+
+  movieClip 128  {
+  }
+
+  movieClip 130  {
+  }
+
+  movieClip 132  {
+  }
+
+  movieClip 134  {
+  }
+
+  movieClip 136  {
+  }
+
+  movieClip 138  {
+  }
+
+  movieClip 139  {
+  }
+
+  movieClip 141  {
+  }
+
+  movieClip 144  {
+  }
+
+  movieClip 145  {
+  }
+
+  movieClip 147  {
+  }
+
+  movieClip 149  {
+  }
+
+  movieClip 151  {
+  }
+
+  movieClip 153  {
+  }
+
+  movieClip 155  {
+  }
+
+  movieClip 157  {
+  }
+
+  movieClip 159  {
+  }
+
+  movieClip 161  {
+  }
+
+  movieClip 163  {
+  }
+
+  movieClip 165  {
+  }
+
+  movieClip 167  {
+  }
+
+  movieClip 168  {
+  }
+
+  movieClip 169  {
+  }
+
+  movieClip 171  {
+  }
+
+  movieClip 173  {
+  }
+
+  movieClip 174  {
+  }
+
+  movieClip 176  {
+  }
+
+  movieClip 178  {
+  }
+
+  movieClip 180  {
+  }
+
+  movieClip 182  {
+  }
+
+  movieClip 183  {
+  }
+
+  movieClip 185  {
+  }
+
+  movieClip 187  {
+  }
+
+  movieClip 189  {
+  }
+
+  movieClip 191  {
+  }
+
+  movieClip 193  {
+  }
+
+  movieClip 195  {
+  }
+
+  movieClip 197  {
+  }
+
+  movieClip 198  {
+  }
+
+  movieClip 200  {
+  }
+
+  movieClip 202  {
+  }
+
+  movieClip 204  {
+  }
+
+  movieClip 206  {
+  }
+
+  movieClip 208  {
+  }
+
+  movieClip 209  {
+  }
+
+  movieClip 211  {
+  }
+
+  movieClip 213  {
+  }
+
+  movieClip 215  {
+  }
+
+  movieClip 217  {
+  }
+
+  movieClip 219  {
+  }
+
+  movieClip 220  {
+  }
+
+  movieClip 223  {
+  }
+
+  movieClip 225  {
+  }
+
+  movieClip 226  {
+  }
+
+  movieClip 231  {
+  }
+
+  movieClip 232  {
+  }
+
+  movieClip 233  {
+  }
+
+  movieClip 236  {
+  }
+
+  movieClip 239  {
+  }
+
+  movieClip 242  {
+  }
+
+  movieClip 243  {
+  }
+
+  movieClip 246  {
+  }
+
+  movieClip 249  {
+  }
+
+  movieClip 252  {
+  }
+
+  movieClip 255  {
+  }
+
+  movieClip 258  {
+  }
+
+  movieClip 261  {
+  }
+
+  movieClip 263  {
+  }
+
+  movieClip 265  {
+  }
+
+  movieClip 267  {
+  }
+
+  movieClip 269  {
+  }
+
+  movieClip 270  {
+  }
+
+  movieClip 271  {
+  }
+
+  movieClip 272  {
+  }
+  
+  // unknown tag 82 length 106994
+  
+  // unknown tag 76 length 1874
+}

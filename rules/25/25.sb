@@ -1,0 +1,1 @@
+{"program":"discuz", "detector":"Custom", "source":true, "detectorx":"SWFAduit", "customdata":"this\\.playlistURL\\s*=\\s*_root\\.file", "type":"Flass XSS", "severity":"Medium", "url":"static/image/common/mp3player.swf", "payload":"", "description":"if (_root.file != undefined) { this.playlistURL = _root.file;}", "suggestion":"update", "file":"static/image/common/mp3player.swf"}

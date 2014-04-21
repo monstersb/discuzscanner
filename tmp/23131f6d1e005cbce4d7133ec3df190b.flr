@@ -1,0 +1,1142 @@
+movie '/home/monster/Develop/scanner//tmp/23131f6d1e005cbce4d7133ec3df190b.swf' {
+// flash 8, total frames: 1, frame rate: 25 fps, 250x200 px, compressed
+
+  movieClip 2  {
+  }
+
+  movieClip 4  {
+  }
+
+  movieClip 5  {
+  }
+
+  movieClip 7  {
+  }
+
+  movieClip 9  {
+  }
+
+  movieClip 10  {
+  }
+
+  movieClip 12  {
+  }
+
+  movieClip 13  {
+  }
+
+  movieClip 16  {
+  }
+
+  movieClip 17  {
+  }
+
+  movieClip 18  {
+  }
+
+  movieClip 20  {
+  }
+
+  movieClip 22  {
+  }
+
+  movieClip 24  {
+  }
+
+  movieClip 26  {
+  }
+
+  movieClip 27  {
+  }
+
+  movieClip 29  {
+  }
+
+  movieClip 31  {
+  }
+
+  movieClip 33  {
+  }
+
+  movieClip 34  {
+  }
+
+  movieClip 36  {
+  }
+
+  movieClip 37  {
+  }
+
+  movieClip 40  {
+  }
+
+  movieClip 41  {
+  }
+
+  movieClip 44  {
+  }
+
+  movieClip 45  {
+  }
+
+  movieClip 47  {
+  }
+
+  movieClip 48  {
+  }
+
+  movieClip 51  {
+  }
+
+  movieClip 53  {
+  }
+
+  movieClip 55  {
+  }
+
+  movieClip 56  {
+  }
+
+  movieClip 59  {
+  }
+
+  movieClip 60  {
+  }
+
+  movieClip 61  {
+  }
+
+  movieClip 63  {
+  }
+
+  movieClip 64  {
+  }
+
+  movieClip 65 jwMp3player {
+
+    #initclip
+      Object.registerClass('jwMp3player', jwMp3player);
+    #endinitclip
+  }
+
+  movieClip 66 __Packages.jwMp3player {
+
+    #initclip
+      if (!_global.jwMp3player) {
+        var v1 = function () {
+          super();
+          if (_root.config != undefined) {
+            this.configURL = _root.config;
+            this.playlistURL = this.configURL;
+          }
+          if (_root.file != undefined) {
+            this.playlistURL = _root.file;
+          }
+          if (_root.autostart != undefined) {
+            this.configArray[0].autostart = _root.autostart;
+          }
+          this.setStageVars();
+          this.readConfig();
+          if (flash.external.ExternalInterface.available) {
+            var v4 = flash.external.ExternalInterface.addCallback('jsControl', this, this.jsPerformer);
+          }
+        };
+
+        _global.jwMp3player = v1;
+        _global.jwMp3player extends MovieClip;
+        var v2 = v1.prototype;
+        v2.setStageVars = function () {
+          Stage.scaleMode = 'noScale';
+          Stage.align = 'TL';
+          this.configArray[0].width = Stage.width;
+          this.configArray[0].height = Stage.height;
+        };
+
+        v2.readConfig = function () {
+          this.configXML = new XML();
+          this.configXML.ignoreWhite = true;
+          this.configXML.parent = this;
+          this.configXML.onLoad = function (success) {
+            if (success) {
+              var v2 = this.firstChild.firstChild.firstChild;
+              while (v2 != null) {
+                this.parent.configArray[0][v2.nodeName] = v2.firstChild.nodeValue;
+                v2 = v2.nextSibling;
+              }
+              trace(this.parent.configArray[0].height);
+              if (this.parent.configArray[0].height < 30) {
+                this.parent.configArray[0].showdisplay = 'false';
+              }
+            } else {}
+            delete this.parent.configXML;
+            this.parent.setSizesColorsButtons();
+            this.parent.readFile();
+          };
+
+          this.configXML.load(this.configURL);
+        };
+
+        v2.readFile = function (fl) {
+          if (fl) {
+            this.playlistURL = fl;
+          }
+          var v2 = 0;
+          while (v2 < this.playlistArray.length) {
+            this.playlist['button' + v2].removeMovieClip();
+            ++v2;
+          }
+          this.playlistArray = new Array();
+          this.soundObj = new Sound();
+          this.soundCurrent = 0;
+          this.soundState = 'idle';
+          if ((this.playlistURL.substr(-4, 4)).toLowerCase() == '.mp3') {
+            var v3 = this.playlistURL.substring(this.playlistURL.lastIndexOf('/') + 1, this.playlistURL.length - 4);
+            this.playlistArray.push({'title': v3, 'file': this.playlistURL, 'link': ''});
+            if (this.configArray[0].autostart == 'true') {
+              this.playSong();
+            }
+          } else {
+            this.playlistObj = new jwPlaylist();
+            this.playlistObj.addEventListener('read', mx.utils.Delegate.create(this, this.buildPlaylist));
+            this.playlistObj.readPlaylist(this.playlistURL);
+          }
+        };
+
+        v2.buildPlaylist = function (obj) {
+          this.playlistArray = obj.playlist;
+          delete this.playlistObj;
+          this.setPlaylistSizesColorsButtons();
+          if (this.configArray[0].showdisplay == 'true') {
+            this.checkForCover();
+          }
+          if (this.configArray[0].autostart == 'true') {
+            this.playSong();
+          }
+        };
+
+        v2.jsPerformer = function (func, param) {
+          if (func == 'pause') {
+            this.playPause();
+          } else {
+            if (func == 'play') {
+              this.playSong(Number(param));
+            } else {
+              if (func == 'scrub') {
+                this.scrubSong(Number(param));
+              } else {
+                if (func == 'volume') {
+                  this.setVolume(Number(param));
+                } else {
+                  if (func == 'link') {
+                    this.getLink(Number(param));
+                  } else {
+                    if (func == 'load') {
+                      this.readFile(param);
+                    }
+                  }
+                }
+              }
+            }
+          }
+        };
+
+        v2.playSong = function (i) {
+          this.playlist['button' + this.soundCurrent].back._alpha = 0;
+          this.soundState = 'load';
+          this.soundPausePos = 0;
+          if (i != undefined) {
+            this.soundCurrent = i;
+          } else {
+            if (this.configArray[0].shuffle == 'true') {
+              this.setRandomCurrent();
+            }
+          }
+          this.playlist['button' + this.soundCurrent].back._alpha = 25;
+          this.controlsPlay._visible = false;
+          this.controlsPause._visible = true;
+          this.soundObj = new Sound(this);
+          this.soundObj.parent = this;
+          this.soundObj.onSoundComplete = function () {
+            this.parent.callBack('complete');
+            if (this.parent.configArray[0].repeat == 'all') {
+              this.parent.nextSong();
+            } else {
+              if (this.parent.configArray[0].repeat == 'one') {
+                this.parent.playSong(this.parent.soundCurrent);
+              } else {
+                if (this.parent.configArray[0].repeat == 'list' && (this.parent.soundCurrent != this.parent.playlistArray.length - 1 && this.parent.configArray[0].shuffle == 'false' || this.parent.soundRandom.length != 0)) {
+                  this.parent.nextSong();
+                } else {
+                  this.parent.soundState = 'idle';
+                }
+              }
+            }
+          };
+
+          if (this.configArray[0].showdisplay == 'true') {
+            this.checkForCover();
+          }
+          this.soundObj.loadSound(this.playlistArray[this.soundCurrent].file, true);
+          this.setVolume(Number(this.configArray[0].volume));
+          this.soundObj.start();
+          this.callBack('start');
+        };
+
+        v2.callBack = function (action) {
+          if (this.configArray[0].callback != undefined) {
+            trace(this.configArray[0].callback);
+            var v2 = new LoadVars();
+            v2.file = this.playlistArray[this.soundCurrent].file;
+            v2.title = this.playlistArray[this.soundCurrent].title;
+            v2.identifier = this.playlistArray[this.soundCurrent].identifier;
+            v2.playlist = this.playlistURL;
+            v2.action = action;
+            v2.sendAndLoad(this.configArray[0].callback, v2, 'POST');
+          }
+        };
+
+        v2.setRandomCurrent = function () {
+          if (this.soundRandom.length == 0) {
+            var v2 = 0;
+            while (v2 < this.playlistArray.length) {
+              this.soundRandom.push(v2);
+              ++v2;
+            }
+          }
+          var v3 = random(this.soundRandom.length);
+          this.soundCurrent = this.soundRandom[v3];
+          this.soundRandom.splice(v3, 1);
+        };
+
+        v2.playPause = function () {
+          if (this.soundState == 'idle') {
+            this.playSong();
+            this.soundState = 'load';
+          } else {
+            if (this.soundPausePos > 0) {
+              this.soundObj.start(this.soundPausePos);
+              this.soundPausePos = 0;
+              this.soundState = 'play';
+            } else {
+              this.soundPausePos = this.soundObj.position / 1000;
+              this.soundObj.stop();
+              this.soundState = 'pause';
+            }
+          }
+        };
+
+        v2.nextSong = function () {
+          if (this.configArray[0].shuffle == 'true') {
+            this.playSong();
+          } else {
+            if (this.soundCurrent == this.playlistArray.length - 1) {
+              this.playSong(0);
+            } else {
+              this.playSong(this.soundCurrent + 1);
+            }
+          }
+        };
+
+        v2.prevSong = function () {
+          if (this.configArray[0].shuffle == 'true') {
+            this.playSong(this.soundRandom[this.soundRandom.length - 1]);
+          } else {
+            if (this.soundCurrent == 0) {
+              this.playSong(this.playlistArray.length - 1);
+            } else {
+              this.playSong(this.soundCurrent - 1);
+            }
+          }
+        };
+
+        v2.startScrubbing = function () {
+          this.soundScrubInt = setInterval(this, 'scrubSong', 40);
+        };
+
+        v2.stopScrubbing = function () {
+          clearInterval(this.soundScrubInt);
+        };
+
+        v2.scrubSong = function (xm) {
+          if (xm == undefined) {
+            xm = Math.round((this.controlsProgress.loa._xmouse / this.controlsProgress.loa._width) * this.controlsProgress.loa._xscale);
+          } else {
+            xm = (xm / (this.soundObj.duration / 1000)) * 100;
+          }
+          if (xm > 0 && xm < 100) {
+            this.controlsProgress.tme._xscale = xm;
+            this.soundObj.stop();
+            this.soundObj.start(Math.round(this.soundObj.duration * xm / 100000));
+            this.soundState = 'play';
+            this.soundPausePos = 0;
+          }
+        };
+
+        v2.startVolumeScrubbing = function () {
+          this.soundVolumeScrubInt = setInterval(this, 'scrubVolume', 40);
+        };
+
+        v2.stopVolumeScrubbing = function () {
+          clearInterval(this.soundVolumeScrubInt);
+        };
+
+        v2.scrubVolume = function () {
+          var v4 = this.controlsVolume._xmouse;
+          var v2 = this.controlsVolume.front._x;
+          var v3 = this.controlsVolume.front._width;
+          var v5 = Math.round(((v4 - v2) / v3) * 100);
+          this.setVolume(v5);
+        };
+
+        v2.setVolume = function (vl) {
+          if (vl >= 0 && vl <= 100) {
+            this.configArray[0].volume = vl;
+            this.soundObj.setVolume(vl);
+            this.controlsVolume.mask._width = vl / 5;
+          }
+        };
+
+        v2.getLink = function (i) {
+          this.getURL(this.playlistArray[i].link, this.configArray[0].linktarget);
+        };
+
+        v2.setSizesColorsButtons = function () {
+          var configArray = this.configArray;
+          if (configArray[0].jpgfile != undefined) {
+            this.back.loadMovie(configArray[0].jpgfile);
+            this.displayGlow._visible = false;
+            this.playlistGlow._visible = false;
+          } else {
+            this.back._width = configArray[0].width;
+            this.back.col = new Color(this.back);
+            this.back.col.setRGB(configArray[0].backcolor);
+            this.back._height = configArray[0].height;
+          }
+          if (configArray[0].showdisplay == 'true') {
+            this.displayGlow._width = configArray[0].width;
+            this.displayMask._width = configArray[0].width - 16;
+            this.displayTitle.tf.textColor = configArray[0].lightcolor;
+            this.displayTitle.tf.autoSize = true;
+            this.setEqualizer();
+            this.displayTitle.setMask(this.displayMask);
+            this.displayCover.line.col = new Color(this.displayCover.line);
+            this.displayCover.line.col.setRGB(configArray[0].lightcolor);
+            this.addCoverLoader();
+          } else {
+            this.displayMask._visible = false;
+            this.displayTitle._visible = this.displayMask._visible;
+            this.displayEQ._visible = this.displayMask._visible;
+            this.displayGlow._visible = this.displayMask._visible;
+            this.controlsVolume._y = 0;
+            this.controlsProgress._y = 0;
+            this.controlsPrev._y = 0;
+            this.controlsNext._y = 0;
+            this.controlsPause._y = 0;
+            this.controlsPlay._y = 0;
+            this.playlistGlow._y = 18;
+            this.playlist._y = 19;
+          }
+          this.displayCover._visible = false;
+          this.controlsPlay.icn.col = new Color(this.controlsPlay.icn);
+          this.controlsPlay.icn.col.setRGB(configArray[0].frontcolor);
+          this.controlsPause.icn.col = new Color(this.controlsPause.icn);
+          this.controlsPause.icn.col.setRGB(configArray[0].frontcolor);
+          this.controlsPause._visible = false;
+          this.controlsPause.onRollOver = function () {
+            this.icn.col.setRGB(configArray[0].lightcolor);
+          };
+
+          this.controlsPlay.onRollOver = this.controlsPause.onRollOver;
+          this.controlsPause.onRollOut = function () {
+            this.icn.col.setRGB(configArray[0].frontcolor);
+          };
+
+          this.controlsPlay.onRollOut = this.controlsPause.onRollOut;
+          this.controlsPause.onPress = function () {
+            this._parent.playPause();
+          };
+
+          this.controlsPlay.onPress = this.controlsPause.onPress;
+          this.controlsPrev._visible = false;
+          this.controlsNext._visible = this.controlsPrev._visible;
+          this.controlsProgress._x -= 34;
+          this.controlsProgress._width = configArray[0].width - 56;
+          this.controlsProgress.tme.col = new Color(this.controlsProgress.tme);
+          this.controlsProgress.tme.col.setRGB(configArray[0].frontcolor);
+          this.controlsProgress.loa.col = new Color(this.controlsProgress.loa);
+          this.controlsProgress.loa.col.setRGB(configArray[0].frontcolor);
+          this.controlsProgress.tme._xscale = 0;
+          this.controlsProgress.loa._xscale = 0;
+          this.controlsProgress.loa.onRollOver = function () {
+            this._parent.tme.col.setRGB(configArray[0].lightcolor);
+          };
+
+          this.controlsProgress.loa.onRollOut = function () {
+            this._parent.tme.col.setRGB(configArray[0].frontcolor);
+          };
+
+          this.controlsProgress.loa.onPress = function () {
+            this._parent._parent.startScrubbing();
+          };
+
+          this.controlsProgress.loa.onReleaseOutside = function () {
+            this._parent._parent.stopScrubbing();
+          };
+
+          this.controlsProgress.loa.onRelease = this.controlsProgress.loa.onReleaseOutside;
+          this.controlsVolume._x = configArray[0].width - 38;
+          this.controlsVolume.icn.col = new Color(this.controlsVolume.icn);
+          this.controlsVolume.icn.col.setRGB(configArray[0].frontcolor);
+          this.controlsVolume.front.col = new Color(this.controlsVolume.front);
+          this.controlsVolume.front.col.setRGB(configArray[0].frontcolor);
+          this.controlsVolume.back.col = new Color(this.controlsVolume.back);
+          this.controlsVolume.back.col.setRGB(configArray[0].frontcolor);
+          this.controlsVolume.back.onRollOver = function () {
+            this._parent.front.col.setRGB(configArray[0].lightcolor);
+          };
+
+          this.controlsVolume.back.onRollOut = function () {
+            this._parent.front.col.setRGB(configArray[0].frontcolor);
+          };
+
+          this.controlsVolume.back.onPress = function () {
+            this._parent._parent.startVolumeScrubbing();
+          };
+
+          this.controlsVolume.back.onReleaseOutside = function () {
+            this._parent._parent.stopVolumeScrubbing();
+          };
+
+          this.controlsVolume.back.onRelease = this.controlsVolume.back.onReleaseOutside;
+          this.playlistGlow._width = configArray[0].width;
+          this.playlistGlow._height = configArray[0].height - this.playlistGlow._y;
+          this.playlistGlow._visible = false;
+          this.playlist.button._visible = this.playlistGlow._visible;
+          this.playlist._visible = this.playlistGlow._visible;
+          setInterval(this, 'interfaceUpdater', 200);
+        };
+
+        v2.setPlaylistSizesColorsButtons = function () {
+          var configArray = this.configArray;
+          this.controlsNext._visible = true;
+          this.controlsPrev._visible = this.controlsNext._visible;
+          this.controlsPrev.icn.col = new Color(this.controlsPrev.icn);
+          this.controlsPrev.icn.col.setRGB(configArray[0].frontcolor);
+          this.controlsNext.icn.col = new Color(this.controlsNext.icn);
+          this.controlsNext.icn.col.setRGB(configArray[0].frontcolor);
+          this.controlsNext.onRollOver = function () {
+            this.icn.col.setRGB(configArray[0].lightcolor);
+          };
+
+          this.controlsPrev.onRollOver = this.controlsNext.onRollOver;
+          this.controlsNext.onRollOut = function () {
+            this.icn.col.setRGB(configArray[0].frontcolor);
+          };
+
+          this.controlsPrev.onRollOut = this.controlsNext.onRollOut;
+          this.controlsPrev.onPress = function () {
+            this._parent.prevSong();
+          };
+
+          this.controlsNext.onPress = function () {
+            this._parent.nextSong();
+          };
+
+          this.controlsProgress._width = configArray[0].width - 90;
+          this.controlsProgress._x = 52;
+          if (configArray[0].showplaylist == 'true') {
+            this.playlistGlow._visible = true;
+            this.playlist._visible = this.playlistGlow._visible;
+            var v3 = 0;
+            while (v3 < this.playlistArray.length) {
+              this.playlist.button.duplicateMovieClip('button' + v3, v3);
+              var v2 = this.playlist['button' + v3];
+              v2._y = v3 * 20;
+              v2.tf._width = configArray[0].width - 12;
+              v2.tf.text = this.playlistArray[v3].title;
+              v2.back._width = configArray[0].width - 2;
+              v2.glow._width = configArray[0].width - 2;
+              v2.tf.textColor = configArray[0].frontcolor;
+              v2.back._alpha = 0;
+              v2.back.col = new Color(v2.back);
+              v2.back.col.setRGB(configArray[0].lightcolor);
+              v2.back._alpha = 0;
+              v2.back.onRollOver = function () {
+                this._parent.tf.textColor = configArray[0].lightcolor;
+              };
+
+              v2.back.onRollOut = function () {
+                this._parent.tf.textColor = configArray[0].frontcolor;
+              };
+
+              v2.back.onPress = function () {
+                this._parent._parent._parent.playSong(this._parent.getDepth());
+              };
+
+              if (this.playlistArray[v3].link.length > 4) {
+                v2.link._x = configArray[0].width - 22;
+                v2.link.col = new Color(v2.link);
+                v2.link.col.setRGB(configArray[0].frontcolor);
+                v2.link.onRollOver = function () {
+                  this.col.setRGB(configArray[0].lightcolor);
+                };
+
+                v2.link.onRollOut = function () {
+                  this.col.setRGB(configArray[0].frontcolor);
+                };
+
+                v2.link.onPress = function () {
+                  this._parent._parent._parent.getLink(this._parent.getDepth());
+                };
+
+              } else {
+                v2.link._visible = false;
+              }
+              ++v3;
+            }
+            if (this.playlist._height > this.playlistGlow._height) {
+              this.playlistScroll._visible = true;
+              this.init_scroller();
+              this.playlistGlow.duplicateMovieClip('playlistMask', 1);
+              this.playlist.setMask(this.playlistMask);
+            } else {
+              this.playlistScroll._visible = false;
+              this.playlist._y = this.playlistGlow._y + 1;
+            }
+          }
+        };
+
+        v2.init_scroller = function () {
+          var configArray = this.configArray;
+          var frt = this.playlistScroll.front;
+          var playlist = this.playlist;
+          var v3 = 0;
+          while (v3 < this.playlistArray.length) {
+            var v2 = playlist['button' + v3];
+            v2.tf._width = configArray[0].width - 21;
+            v2.back._width = configArray[0].width - 11;
+            v2.glow._width = configArray[0].width - 11;
+            v2.link._x = configArray[0].width - 31;
+            ++v3;
+          }
+          this.playlistScroll._x = configArray[0].width - 10;
+          this.playlistScroll._y = this.playlistGlow._y + 3;
+          this.playlistScroll.back._height = this.playlistGlow._height - 6;
+          this.playlistScroll.back.col = new Color(this.playlistScroll.back);
+          this.playlistScroll.back.col.setRGB(configArray[0].frontcolor);
+          this.playlistScroll.front._height = Math.round(this.playlistScroll.back._height * this.playlistGlow._height / playlist._height);
+          this.playlistScroll.front.col = new Color(this.playlistScroll.front);
+          this.playlistScroll.front.col.setRGB(configArray[0].frontcolor);
+          var scl = playlist._height / this.playlistScroll.back._height;
+          this.playlistScroll.front.onRollOver = function () {
+            frt.col.setRGB(configArray[0].lightcolor);
+          };
+
+          this.playlistScroll.back.onRollOver = this.playlistScroll.front.onRollOver;
+          this.playlistScroll.front.onRollOut = function () {
+            frt.col.setRGB(configArray[0].frontcolor);
+          };
+
+          this.playlistScroll.back.onRollOut = this.playlistScroll.front.onRollOut;
+          this.playlistScroll.back.onPress = function () {
+            if (this._parent._ymouse < frt._y) {
+              if (frt._y < frt._height / 4) {
+                frt._y = 0;
+                playlist._y = this._parent._y;
+              } else {
+                frt._y -= frt._height / 4;
+                playlist._y += Math.round(scl * frt._height / 4);
+              }
+            } else {
+              if (frt._y > this._height - frt._height * 1.25) {
+                frt._y = this._height - frt._height;
+                playlist._y = this._parent._y + this._parent._height - playlist._height + 2;
+              } else {
+                frt._y += frt._height / 4;
+                playlist._y -= Math.round(scl * frt._height / 4);
+              }
+            }
+          };
+
+          this.playlistScroll.front.onPress = function () {
+            this.startDrag(false, 0, 0, 0, this._parent.back._height - this._height);
+            this.onEnterFrame = function () {
+              if (this._y <= 0) {
+                playlist._y = this._parent._y;
+              } else {
+                if (this._y >= this._parent.back._height - this._height) {
+                  playlist._y = this._parent._y + this._parent._height - playlist._height + 2;
+                } else {
+                  playlist._y = -scl * (this._y - this._parent.back._y) + this._parent._parent.playlistGlow._y;
+                }
+              }
+            };
+
+          };
+
+          this.playlistScroll.front.onReleaseOutside = function () {
+            this.stopDrag();
+            delete this.onEnterFrame;
+          };
+
+          this.playlistScroll.front.onRelease = this.playlistScroll.front.onReleaseOutside;
+        };
+
+        v2.interfaceUpdater = function () {
+          var v2 = '<font color="#' + this.configArray[0].lightcolor.substring(2, 8) + '">';
+          v2 += '<b>' + this.playlistArray[this.soundCurrent].title + '</b> ';
+          var v3 = Math.round((this.soundObj.getBytesLoaded() / this.soundObj.getBytesTotal()) * 100);
+          this.controlsProgress.loa._xscale = v3;
+          if (this.soundState == 'idle') {
+            this.soundShowEQ = false;
+            this.soundPausePos = 0;
+            this.controlsProgress.tme._xscale = 0;
+            this.controlsPlay._visible = true;
+            this.controlsPause._visible = false;
+          } else {
+            if (this.soundState == 'load' || this.soundState == 'play') {
+              this.soundShowEQ = false;
+              this.controlsPlay._visible = false;
+              this.controlsPause._visible = true;
+              var v6 = Math.round((this.soundObj.position / this.soundObj.duration) * v3);
+              this.controlsProgress.tme._xscale = v6;
+              var v4 = this.soundObj.position;
+              if (v4 > this.soundPlayPos) {
+                this.soundShowEQ = true;
+              }
+              this.soundPlayPos = v4;
+              if (v3 > 99) {
+                this.soundState = 'play';
+                var v9 = int(this.soundObj.position / 1000 / 60);
+                var v7 = int(this.soundObj.position / 1000 % 60);
+                var v5 = int(this.soundObj.duration / 1000 / 60);
+                var v8 = int(this.soundObj.duration / 1000 % 60);
+                v2 += '- ' + this.checkD(v9) + ':' + this.checkD(v7) + '/' + this.checkD(v5) + ':' + this.checkD(v8) + '   ';
+              } else {
+                this.soundState = 'load';
+                if (isNaN(v3)) {
+                  v3 = 0;
+                }
+                v2 += '- ' + v3 + '% loaded   ';
+              }
+            } else {
+              if (this.soundState == 'pause') {
+                this.soundShowEQ = false;
+                this.controlsPlay._visible = true;
+                this.controlsPause._visible = false;
+                v2 += '- paused   ';
+              }
+            }
+          }
+          this.displayTitle.tf.htmlText = v2 + '</font>';
+          if (this.displayTitle._width > this.displayMask._width) {
+            this.displayTitle.tf.htmlText = v2 + v2;
+            this.displayTitle.onEnterFrame = function () {
+              --this._x;
+              if (this._x < 8 - this._width / 2) {
+                this._x = 4;
+              }
+            };
+
+          } else {
+            this.displayTitle._x = this.displayMask._x;
+            delete this.displayTitle.onEnterFrame;
+          }
+        };
+
+        v2.checkD = function (toCheck) {
+          if (toCheck < 10) {
+            return '0' + toCheck;
+          } else {
+            return toCheck;
+          }
+        };
+
+        v2.scrollPlaylist = function () {
+          this.playlistGlow.duplicateMovieClip('playlistMask', 1);
+          this.playlist.setMask(this.playlistMask);
+          this.playlistGlow.onEnterFrame = function () {
+            if (this.hitTest(_root._xmouse, _root._ymouse) == true) {
+              var v3 = (this._ymouse / this._height) * this._yscale * 0.02 - 1;
+              var v4 = this._parent.playlist._y;
+              var v5 = this._y + 2;
+              var v6 = this._y - this._parent.playlist._height + this._height - 1;
+              if (v4 > v5 - 5 && v3 < 0) {
+                this._parent.playlist._y = v5;
+              } else {
+                if (v4 < v6 + 5 && v3 > 0) {
+                  this._parent.playlist._y = v6;
+                } else {
+                  this._parent.playlist._y -= Math.floor(v3 * 15);
+                }
+              }
+            }
+          };
+
+        };
+
+        v2.setEqualizer = function () {
+          this.soundEQStripes = Math.floor((this.configArray[0].width - 16) / 6);
+          this.displayEQ.stripes.duplicateMovieClip('stripes2', 1);
+          this.displayEQ.mask.duplicateMovieClip('mask2', 3);
+          this.displayEQ.stripes2._width = this.configArray[0].width - 16;
+          this.displayEQ.stripes._width = this.displayEQ.stripes2._width;
+          this.displayEQ.stripes.top.col = new Color(this.displayEQ.stripes.top);
+          this.displayEQ.stripes.top.col.setRGB(this.configArray[0].lightcolor);
+          this.displayEQ.stripes.bottom.col = new Color(this.displayEQ.stripes.bottom);
+          this.displayEQ.stripes.bottom.col.setRGB(this.configArray[0].frontcolor);
+          this.displayEQ.stripes2.top.col = new Color(this.displayEQ.stripes2.top);
+          this.displayEQ.stripes2.top.col.setRGB(this.configArray[0].lightcolor);
+          this.displayEQ.stripes2.bottom.col = new Color(this.displayEQ.stripes2.bottom);
+          this.displayEQ.stripes2.bottom.col.setRGB(this.configArray[0].frontcolor);
+          this.displayEQ.stripes.setMask(this.displayEQ.mask);
+          this.displayEQ.stripes2.setMask(this.displayEQ.mask2);
+          this.displayEQ.stripes2._alpha = 50;
+          this.displayEQ.stripes._alpha = 50;
+          setInterval(this, 'drawEqualizerFrame', 80, this.displayEQ.mask);
+          setInterval(this, 'drawEqualizerFrame', 80, this.displayEQ.mask2);
+        };
+
+        v2.drawEqualizerFrame = function (tgt) {
+          tgt.clear();
+          tgt.beginFill(0, 100);
+          tgt.moveTo(0, 0);
+          if (this.soundShowEQ == true) {
+            var v5 = Math.round(this.configArray[0].volume / 6);
+          } else {
+            var v5 = 0;
+          }
+          var v2 = 0;
+          while (v2 < this.soundEQStripes) {
+            var v4 = random(v5) + v5 / 2 + 2;
+            if (v2 == Math.floor(this.soundEQStripes / 2)) {
+              v4 = 0;
+            }
+            tgt.lineTo(v2 * 6, -1);
+            tgt.lineTo(v2 * 6, -v4);
+            tgt.lineTo(v2 * 6 + 4, -v4);
+            tgt.lineTo(v2 * 6 + 4, -1);
+            tgt.lineTo(v2 * 6, -1);
+            ++v2;
+          }
+          tgt.lineTo(v2 * 6, 0);
+          tgt.lineTo(0, 0);
+          tgt.endFill();
+        };
+
+        v2.addCoverLoader = function () {
+          this.coverLoader = new MovieClipLoader();
+          this.coverListener = new Object();
+          this.coverListener.tgt = this.displayCover.image.loader;
+          this.coverLoader.addListener(this.coverListener);
+          this.coverListener.onLoadInit = function () {
+            this.tgt._yscale = 100;
+            this.tgt._xscale = 100;
+            if (this.tgt._width < this.tgt._height) {
+              var v2 = Math.ceil(4000 / this.tgt._width);
+            } else {
+              var v2 = Math.ceil(4000 / this.tgt._height);
+            }
+            this.tgt._yscale = v2;
+            this.tgt._xscale = this.tgt._yscale;
+            this.tgt._x = 20 - this.tgt._width / 2;
+            this.tgt._y = 20 - this.tgt._height / 2;
+          };
+
+        };
+
+        v2.checkForCover = function () {
+          if (this.playlistArray[this.soundCurrent].image) {
+            this.displayCover._visible = true;
+            this.displayCover.image.setMask(this.displayCover.mask);
+            this.displayCover.image.loader.clear();
+            this.coverLoader.loadClip(this.playlistArray[this.soundCurrent].image, this.displayCover.image.loader);
+            this.displayMask._x = 60;
+            this.displayEQ._x = 60;
+            this.displayMask._width = this.configArray[0].width - 70;
+            this.displayEQ.stripes2._width = this.configArray[0].width - 68;
+            this.displayEQ.stripes._width = this.displayEQ.stripes2._width;
+            this.soundEQStripes = Math.floor((this.configArray[0].width - 66) / 6);
+          } else {
+            this.displayCover._visible = false;
+            this.displayMask._x = 10;
+            this.displayEQ._x = 12;
+            this.displayMask._width = this.configArray[0].width - 20;
+            this.displayEQ.stripes2._width = this.configArray[0].width - 18;
+            this.displayEQ.stripes._width = this.displayEQ.stripes2._width;
+            this.soundEQStripes = Math.floor((this.configArray[0].width - 16) / 6);
+          }
+        };
+
+        v2.configURL = 'config.xml';
+        v2.configArray = new Array({'autostart': 'false', 'shuffle': 'false', 'repeat': 'none', 'volume': '80', 'showdisplay': 'false', 'showplaylist': 'true', 'linktarget': '_self', 'backcolor': '0xffffff', 'frontcolor': '0x000000', 'lightcolor': '0xcc0000', 'jpgfile': undefined, 'callback': undefined, 'width': 250, 'height': 300});
+        v2.playlistURL = 'playlist.xml';
+        v2.soundState = 'idle';
+        v2.soundPausePos = 0;
+        v2.soundPlayPos = 0;
+        v2.soundCurrent = 0;
+        v2.soundRandom = new Array();
+        v2.soundShowEQ = false;
+        ASSetPropFlags(_global.jwMp3player.prototype, null, 1);
+      }
+    #endinitclip
+  }
+
+  movieClip 67 __Packages.jwPlaylist {
+
+    #initclip
+      if (!_global.jwPlaylist) {
+        var v1 = function () {
+          mx.events.EventDispatcher.initialize(this);
+        };
+
+        _global.jwPlaylist = v1;
+        var v2 = v1.prototype;
+        v2.dispatchEvent = function () {};
+
+        v2.addEventListener = function () {};
+
+        v2.removeEventListener = function () {};
+
+        v2.readPlaylist = function (plf) {
+          this.playlistFile = plf;
+          this.playlistXML = new XML();
+          this.playlistXML.ignoreWhite = true;
+          this.playlistXML.parent = this;
+          this.playlistXML.onLoad = function (success) {
+            if (success) {
+              var v2 = this.firstChild.nodeName.toLowerCase();
+              trace(this.firstChild.nodeName);
+              if (v2 == 'rss') {
+                var v6 = this.parent.parseRSS();
+              } else {
+                if (v2 == 'playlist') {
+                  var v6 = this.parent.parseXSPF();
+                } else {
+                  this.parent.playlistArray = new Array({'title': 'wrong playlist format', 'file': '', 'link': ''});
+                }
+              }
+            } else {
+              this.parent.playlistArray = new Array({'title': 'playlist not found', 'file': '', 'link': ''});
+            }
+            this.parent.eventObject = {'target': this.parent, 'type': 'read'};
+            this.parent.eventObject.playlist = this.parent.playlistArray;
+            this.parent.dispatchEvent(this.parent.eventObject);
+            delete this.parent.playlistXML;
+          };
+
+          this.playlistXML.load(this.playlistFile);
+        };
+
+        v2.parseRSS = function () {
+          this.playlistArray = new Array();
+          var v4 = this.playlistXML.firstChild.firstChild.firstChild;
+          while (v4 != null) {
+            if (v4.nodeName == 'item') {
+              var v2 = v4.firstChild;
+              var v6 = '';
+              var v3 = '';
+              var v5 = '';
+              while (v2 != null) {
+                if (v2.nodeName == 'title') {
+                  v6 = v2.firstChild.nodeValue;
+                } else {
+                  if (v2.nodeName == 'enclosure') {
+                    v3 = unescape(v2.attributes.url);
+                  } else {
+                    if (v2.nodeName == 'link') {
+                      v5 = v2.firstChild.nodeValue;
+                    }
+                  }
+                }
+                v2 = v2.nextSibling;
+              }
+              if (v3 != null) {
+                this.playlistArray.push({'title': v6, 'file': v3, 'link': v5});
+              }
+            }
+            v4 = v4.nextSibling;
+          }
+        };
+
+        v2.parseXSPF = function () {
+          this.playlistArray = new Array();
+          var v9 = this.playlistXML.firstChild.firstChild;
+          while (v9 != null) {
+            if (v9.nodeName == 'trackList') {
+              var v3 = v9.firstChild;
+              while (v3 != null) {
+                var v2 = v3.firstChild;
+                var v6 = '';
+                var v4 = '';
+                var v7 = '';
+                var v8 = '';
+                var v5 = '';
+                while (v2 != null) {
+                  if (v2.nodeName == 'annotation') {
+                    v6 = v2.firstChild.nodeValue;
+                  } else {
+                    if (v2.nodeName == 'location') {
+                      v4 = unescape(v2.firstChild.nodeValue);
+                    } else {
+                      if (v2.nodeName == 'info') {
+                        v7 = v2.firstChild.nodeValue;
+                      } else {
+                        if (v2.nodeName == 'image') {
+                          v8 = v2.firstChild.nodeValue;
+                        } else {
+                          if (v2.nodeName == 'identifier') {
+                            v5 = v2.firstChild.nodeValue;
+                          }
+                        }
+                      }
+                    }
+                  }
+                  v2 = v2.nextSibling;
+                }
+                this.playlistArray.push({'title': v6, 'file': v4, 'link': v7, 'image': v8, 'identifier': v5});
+                v3 = v3.nextSibling;
+              }
+            }
+            v9 = v9.nextSibling;
+          }
+        };
+
+        ASSetPropFlags(_global.jwPlaylist.prototype, null, 1);
+      }
+    #endinitclip
+  }
+
+  movieClip 68 __Packages.mx.events.EventDispatcher {
+
+    #initclip
+      if (!_global.mx) {
+        _global.mx = new Object();
+      }
+      if (!_global.mx.events) {
+        _global.mx.events = new Object();
+      }
+      if (!_global.mx.events.EventDispatcher) {
+        var v1 = function () {};
+
+        mx.events.EventDispatcher = v1;
+        var v2 = v1.prototype;
+        v1._removeEventListener = function (queue, event, handler) {
+          if (queue != undefined) {
+            var v4 = queue.length;
+            var v1;
+            v1 = 0;
+            while (v1 < v4) {
+              var v2 = queue[v1];
+              if (v2 == handler) {
+                queue.splice(v1, 1);
+                return undefined;
+              }
+              ++v1;
+            }
+          }
+        };
+
+        v1.initialize = function (object) {
+          if (mx.events.EventDispatcher._fEventDispatcher == undefined) {
+            mx.events.EventDispatcher._fEventDispatcher = new mx.events.EventDispatcher();
+          }
+          object.addEventListener = mx.events.EventDispatcher._fEventDispatcher.addEventListener;
+          object.removeEventListener = mx.events.EventDispatcher._fEventDispatcher.removeEventListener;
+          object.dispatchEvent = mx.events.EventDispatcher._fEventDispatcher.dispatchEvent;
+          object.dispatchQueue = mx.events.EventDispatcher._fEventDispatcher.dispatchQueue;
+        };
+
+        v2.dispatchQueue = function (queueObj, eventObj) {
+          var v7 = '__q_' + eventObj.type;
+          var v4 = queueObj[v7];
+          if (v4 != undefined) {
+            var v5;
+            for (v5 in v4) {
+              var v1 = v4[v5];
+              var v3 = typeof v1;
+              if (v3 == 'object' || v3 == 'movieclip') {
+                if (v1.handleEvent != undefined) {
+                  v1.handleEvent(eventObj);
+                }
+                if (v1[eventObj.type] != undefined) {
+                  if (mx.events.EventDispatcher.exceptions[eventObj.type] == undefined) {
+                    v1[eventObj.type](eventObj);
+                  }
+                }
+              } else {
+                v1.apply(queueObj, [eventObj]);
+              }
+            }
+          }
+        };
+
+        v2.dispatchEvent = function (eventObj) {
+          if (eventObj.target == undefined) {
+            eventObj.target = this;
+          }
+          this[eventObj.type + 'Handler'](eventObj);
+          this.dispatchQueue(this, eventObj);
+        };
+
+        v2.addEventListener = function (event, handler) {
+          var v3 = '__q_' + event;
+          if (this[v3] == undefined) {
+            this[v3] = new Array();
+          }
+          _global.ASSetPropFlags(this, v3, 1);
+          mx.events.EventDispatcher._removeEventListener(this[v3], event, handler);
+          this[v3].push(handler);
+        };
+
+        v2.removeEventListener = function (event, handler) {
+          var v2 = '__q_' + event;
+          mx.events.EventDispatcher._removeEventListener(this[v2], event, handler);
+        };
+
+        v1._fEventDispatcher = undefined;
+        v1.exceptions = {'move': 1, 'draw': 1, 'load': 1};
+        ASSetPropFlags(mx.events.EventDispatcher.prototype, null, 1);
+      }
+    #endinitclip
+  }
+
+  movieClip 69 __Packages.mx.utils.Delegate {
+
+    #initclip
+      if (!_global.mx) {
+        _global.mx = new Object();
+      }
+      if (!_global.mx.utils) {
+        _global.mx.utils = new Object();
+      }
+      if (!_global.mx.utils.Delegate) {
+        var v1 = function (f) {
+          super();
+          this.func = f;
+        };
+
+        mx.utils.Delegate = v1;
+        mx.utils.Delegate extends Object;
+        var v2 = v1.prototype;
+        v1.create = function (obj, func) {
+          var v2 = function () {
+            var v2 = arguments.callee.target;
+            var v3 = arguments.callee.func;
+            return v3.apply(v2, arguments);
+          };
+
+          v2.target = obj;
+          v2.func = func;
+          return v2;
+        };
+
+        v2.createDelegate = function (obj) {
+          return mx.utils.Delegate.create(obj, this.func);
+        };
+
+        ASSetPropFlags(mx.utils.Delegate.prototype, null, 1);
+      }
+    #endinitclip
+  }
+}

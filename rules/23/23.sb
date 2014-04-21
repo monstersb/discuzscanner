@@ -1,0 +1,1 @@
+{"program":"discuz", "source":true, "detector":"SWFAduit", "basis":"keyword", "keyword":"if\\(empty\\(\\$_GET\\['view'\\]\\)\\) \\$_GET\\['view'\\] = 'we'\\;", "type":"Flash XSS", "severity":"Medium", "url":"source/include/space/space_reward.php", "payload":"", "description":"", "suggestion":"update", "file":"source/include/space/space_reward.php"}

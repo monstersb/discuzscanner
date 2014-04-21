@@ -1,0 +1,1 @@
+{"program":"discuz", "detector":"Accurate", "method":"get", "cookies":false, "headers":false, "md5":"7d675405ff7c94fa899784b7ccae68d3", "type":"Flass XSS", "severity":"Medium", "url":"static/image/common/flvplayer.swf", "payload":"", "description":"", "suggestion":"update", "file":"static/image/common/flvplayer.swf"}

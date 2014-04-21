@@ -1,0 +1,1 @@
+{"program":"discuz", "source":true, "detector":"Aduit", "basis":"keyword", "keyword":"\\$orderby = \\$_G\\['gp_orderby'\\]\\;", "type":"Reflective XSS", "severity":"Medium", "url":"source/include/misc/misc_ranklist_activity.php", "payload":"", "description":"$orderby = $_G['gp_orderby'];", "suggestion":"update", "file":"source/include/misc/misc_ranklist_activity.php"}

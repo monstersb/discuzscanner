@@ -1,0 +1,1 @@
+{"program":"discuz", "detector":"Fuzzy", "method":"get", "cookies":false, "headers":false, "basis":"keyword", "keyword":"password", "type":"Sensitive Path", "severity":"Low", "url":"uc_server/admin.php", "payload":"", "description":"", "suggestion":"update", "file":"uc_server/admin.php"}

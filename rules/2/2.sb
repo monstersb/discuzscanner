@@ -1,0 +1,1 @@
+{"program":"discuz", "detector":"Accurate", "method":"get", "cookies":false, "headers":false, "md5":"c16a7c6143f098472e52dd13de85527f", "type":"Flass XSS", "severity":"Medium", "url":"static/image/common/focus.swf", "payload":"", "description":"", "suggestion":"update", "file":"static/image/common/focus.swf"}

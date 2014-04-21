@@ -1,0 +1,1 @@
+{"program":"discuz", "source":true, "detector":"Aduit", "basis":"keyword", "keyword":"libfile", "type":"Information Leakage", "severity":"Low", "url":"source/function/function_connect.php", "payload":"", "description":"", "suggestion":"update", "file":"source/function/function_connect.php"}

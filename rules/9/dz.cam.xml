@@ -1,0 +1,60 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<parameter>
+<images><categories name="default" directory="static/image/foreground/default/"><img name="img001.png"/>
+</categories>
+<categories name="nature" directory="static/image/foreground/nature/"><img name="img101.png"/>
+</categories>
+</images>
+<language>
+<create>创建</create>
+<notCreate>取消</notCreate>
+<albumName>相册名</albumName>
+<createTitle>创建新相册</createTitle>
+<categoryDesc>相册分类</categoryDesc>
+<categoryPrompt>请选择相册分类</categoryPrompt>
+<okbtn>继续</okbtn>
+<cancelbtn>查看</cancelbtn>
+<desultory>抓拍</desultory>
+<series>连拍</series>
+<save>保存</save>
+<pageup>上一页</pageup>
+<pagedown>下一页</pagedown>
+<clearbg>清除相框</clearbg>
+<reload>重载</reload>
+<cancel>取消</cancel>
+<siteerror>参数错误,系统载入失败</siteerror>
+<ver1>程序需 FlashPlayer 9.0.45 以上版本您的播放器版本为</ver1>
+<ver2>请升级</ver2>
+<refuse><![CDATA[<a href='javascript:alert(2)'>返回请点击这里</a>]]></refuse>
+<countdown>倒数</countdown>
+<second>秒</second>
+<nocam> <![CDATA[<a href='javascript:alert(2)'>返回请点击这里</a>]]></nocam>
+<autoShooting>秒自拍</autoShooting>
+<explain>参数设置:</explain>
+<okTitle>上传完成</okTitle>
+<okMsg>大头贴上传完成</okMsg>
+<saveTitle>正在上传</saveTitle>
+<saveToNote>保存到</saveToNote>
+<saveMsg1>总共有</saveMsg1>
+<saveMsg2>张大头贴,正在保存第</saveMsg2>
+<saveMsg3>张大头贴</saveMsg3>
+</language>
+<config>
+<userid>61</userid>
+<hash>92a684545b9b312de7b02f23e692f571</hash>
+<maxupload>3145728</maxupload>
+<uploadurl>http%3A%2F%2Fwww.hsshmall.com%2Fbbs%2Fhome.php%3Fmod%3Dmisc%26ac%3Dswfupload%26op%3Dscreen</uploadurl>
+<feedurl>http%3A%2F%2Fwww.hsshmall.com%2Fbbs%2Fhome.php%3Fmod%3Dmisc%26ac%3Dswfupload%26op%3Dfinish%26random%3DRajxRfr6%26albumid%3D</feedurl>
+<albumurl>http%3A%2F%2Fwww.hsshmall.com%2Fbbs%2Fhome.php%3Fmod%3Dspace%26do%3Dalbum%26id%3D</albumurl>
+<categoryStat>1</categoryStat>
+<categoryRequired>1</categoryRequired>
+<countdown>3</countdown>
+<countBy>2000</countBy>
+</config>
+<albums>
+<album id="-1">请选择相册</album><album id="add">+创建新相册</album>
+</albums>
+<categorys>
+<category catid="0">选择分类</category><category catid="1">家人</category><category catid="2">朋友</category><category catid="3">同事</category><category catid="4">网友</category><category catid="5">同学</category><category catid="6">其他</category></categorys>
+</parameter>

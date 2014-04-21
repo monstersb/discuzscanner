@@ -1,0 +1,1 @@
+{"program":"discuz", "source":true, "detector":"Aduit", "basis":"keyword", "keyword":"array_key_exists", "type":"Information Leakage", "severity":"Low", "url":"api.php", "payload":"", "description":"", "suggestion":"update", "file":"api.php"}
