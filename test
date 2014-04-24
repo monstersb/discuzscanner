@@ -1,8 +1,154 @@
-<?php
-    function    
-       xx 
-        (){
-    asdasdasd
-    }
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script type="text/javascript">var QosSS=new Object();QosSS.t=new Array([0,0,0,0,0,0]);QosSS.t[0]=(new Date()).getTime();</script>
 
-?>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>提示信息 - 大成社区</title>
+<style>
+/*调整帖子内容页图章的显示位置*/
+html body #threadstamp img {
+    position: absolute;
+    top: -70px;
+    right: 90;
+}
+</style> 
+<meta name="keywords" content="" />
+<meta name="description" content=",大成社区" />
+<meta name="generator" content="Discuz! X3.1" />
+<meta name="author" content="Discuz! Team and Comsenz UI Team" />
+<meta name="copyright" content="2001-2013 Comsenz Inc." />
+<meta name="MSSmartTagsPreventParsing" content="True" />
+<meta http-equiv="MSThemeCompatible" content="Yes" />
+<base href="http://mycd.qq.com/" /><link rel="stylesheet" type="text/css" href="data/cache/style_mycd_2_common.css?Ajf" /><link rel="stylesheet" type="text/css" href="data/cache/style_mycd_2_group_group.css?Ajf" /><script type="text/javascript">var STYLEID = 'mycd_2', STATICURL = 'static/', IMGDIR = 'http://mat1.gtimg.com/cd/tencent_city/static/tencent/image', VERHASH = 'Ajf', charset = 'utf-8', discuz_uid = '12531004', cookiepre = 'C7s4_2132_', cookiedomain = '', cookiepath = '/', showusercard = '1', attackevasive = '0', disallowfloat = 'newthread', creditnotice = '1|经验|,2|金币|,3|贡献|,4|人气|', defaultstyle = '', REPORTURL = 'aHR0cDovL215Y2QucXEuY29tL2ZvcnVtLnBocD9tb2Q9Z3JvdXAmYWN0aW9uPWpvaW4mZmlkPTEy', SITEURL = 'http://mycd.qq.com/', JSPATH = 'http://mat1.gtimg.com/cd/tencent_city/static/js/', DYNAMICURL = '', SITEPRE = 'mycd', CURMODULE = 'group', WEBURL = 'http://cd.qq.com/';</script>
+<script type="text/javascript">	var CURSCRIPT = 'forum';	if (CURSCRIPT == 'forum' && CURMODULE == 'index') window.location.href = 'forum.php?mod=guide';</script>
+<script src="http://mat1.gtimg.com/cd/tencent_city/static/js/common.js?Ajf" type="text/javascript"></script>
+<meta name="application-name" content="大成社区" />
+<meta name="msapplication-tooltip" content="大成社区" />
+<meta name="msapplication-task" content="name=论坛;action-uri=http://mycd.qq.com/forum.php;icon-uri=http://mycd.qq.com/http://mat1.gtimg.com/cd/tencent_city/static/tencent/image/bbs.ico" />
+<meta name="msapplication-task" content="name=用户中心;action-uri=http://mycd.qq.com/home.php;icon-uri=http://mycd.qq.com/http://mat1.gtimg.com/cd/tencent_city/static/tencent/image/home.ico" /><script src="http://mat1.gtimg.com/cd/tencent_city/static/js/forum.js?Ajf" type="text/javascript"></script>
+<script src="http://mat1.gtimg.com/cd/tencent_city/static/js/jquery.min.js" type="text/javascript"></script><script type="text/javascript">var J = jQuery.noConflict(), pgCacheStatus;</script>
+</head>
+
+<body id="nv_group" class="pg_group" onkeydown="if(event.keyCode==27) return false;">
+<div id="append_parent"></div><div id="ajaxwaitid"></div>
+<div id="hd">
+<div class="wp">
+<div class="gnav">
+<a href="./" title="大成社区" class="logo z"><img src="http://mat1.gtimg.com/cd/tencent_city/static/tencent/mycd/logo.jpg" alt="大成社区" border="0" /></a><div class="city z" id="change_city">
+<a href="javascript:;" class="cg">成都</a>
+<div class="drop_menu">
+<ul><li><a href="plugin.php?id=life:common&mod=setcity&city=mync">南充</a></li>
+<li><a href="plugin.php?id=life:common&mod=setcity&city=mymy">绵阳</a></li>
+<li><a href="plugin.php?id=life:common&mod=setcity&city=mylz">泸州</a></li>
+</ul>
+</div>
+</div>
+<div class="nv z">
+<ul>
+<li><a href="http://mycd.qq.com"><strong>首页</strong></a></li>
+<li><a href="forum.php?mod=guide" id="nav_forum" onmouseover="showMenu(this.id);loadsubforum()"><strong>版块<i></i></strong></a></li>
+<li><a href="javascript:;" id="nav_catalog" onmouseover="showMenu(this.id);"><strong>频道<i></i></strong></a></li>
+<li><a href="forum.php?mod=collection"><strong>专辑</strong></a></li>
+<li><a href="activity.php"><strong>活动</strong></a></li>
+<li><a href="home.php"><strong>我家</strong></a></li>
+</ul>
+</div>
+<div id="lscbar" class="search z">
+<form id="scbar_form" method="post" autocomplete="off" onsubmit="searchFocus($('lscbar_txt'))" action="search.php?searchsubmit=yes" target="_blank">
+<input type="hidden" name="mod" id="scbar_mod" value="search" />
+<input type="hidden" name="formhash" value="f592a4b7" />
+<input type="hidden" name="srchtype" value="title" />
+<input type="hidden" name="srhfid" value="12" />
+<input type="hidden" name="srhlocality" value="group::group" />
+<a href="javascript:;" class="btn y" onclick="$('scbar_form').submit()">搜索</a>
+<input type="text" name="srchtxt" id="lscbar_txt" size="2" title="搜索" value="" />
+</form>
+</div>
+<script type="text/javascript">
+initSearchmenu('lscbar', '');
+</script>
+<div class="un y">
+<div class="login_box z lwhite">
+<a href="home.php" title="访问我的空间" class="avt"><img src="http://p.qlogo.cn/cforumsz/12531004/bbscd_12531004_virtual/120" /></a><a href="home.php" title="访问我的空间" class="n lwhite">Monster123</a> [<a href="member.php?mod=logging&amp;action=logout&amp;formhash=f592a4b7">退出</a>]</div>
+<div class="mess_box z">
+<a href="home.php?mod=spacecp" class="n1" title="设置"></a>
+<a href="home.php?mod=space&amp;do=notice" class="n2" title="提醒"></a>
+<a href="home.php?mod=space&amp;do=pm" class="n3" title="消息"></a>
+</div>
+</div>
+<div class="sub p_pof" style="display:none" id="nav_catalog_menu">
+<a href="//cd.qq.com/" target="_blank">大成网</a> | <a href="//mycd.qq.com/shopping/" target="_blank">购物</a> | <a href="//mycd.qq.com/ieat/"  target="_blank">美食</a> | <a href="//mycd.qq.com/travel/"  target="_blank">旅游</a> | <a href="//mycd.qq.com/wedding/"  target="_blank">婚嫁</a> | <a href="//mycd.qq.com/qinzi/"  target="_blank">亲子</a> | <a href="//mycd.qq.com/jiaju/"  target="_blank">家居</a> | <a href="//cd.qq.com/news/"  target="_blank">城事</a> | <a href="//cd.qq.com/newsphoto/"  target="_blank">图库</a> | <a href="//cd.qq.com/ent/"  target="_blank">娱乐</a> | <a href="//cd.qq.com/movie/"  target="_blank">电影</a> | <a href="//cd.house.qq.com/"  target="_blank">房产</a> | <a href="//esf.cd.qq.com/"  target="_blank">二手房</a> | <a href="//cd.qq.com/auto/"  target="_blank">汽车</a> | <a href="//cd.qq.com/money/"  target="_blank">理财</a> | <a href="//cd.qq.com/szsh/"  target="_blank">数码</a> | <a href="//cd.qq.com/edu/"  target="_blank">教育</a></div>
+</div>
+</div>
+</div>
+<div class="sub p_pof subforum" style="display:none" id="nav_forum_menu">&nbsp;</div><div id="qmenu_menu" class="p_pop" style="display: none;">
+<ul class="cl nav"><li><a href="home.php?mod=magic" style="background-image:url(http://mycd.qq.com/static/image/feed/magic_b.png) !important">道具</a></li>
+<li><a href="home.php?mod=medal" style="background-image:url(http://mycd.qq.com/static/image/feed/medal_b.png) !important">勋章</a></li>
+<li><a href="home.php?mod=task" style="background-image:url(http://mycd.qq.com/static/image/feed/task_b.png) !important">任务</a></li>
+<li><a href="misc.php?mod=ranklist" style="background-image:url(http://mycd.qq.com/static/image/feed/ranklist_b.png) !important">排行榜</a></li>
+<li><a href="http://mycd.qq.com/home.php?mod=spacecp&ac=credit&op=transfer" target="_blank" style="background-image:url(http://mat1.gtimg.com/cd/haitao/gengxin2/jinbizhuanzhangrukou.png) !important">转账</a></li>
+</ul>
+<div id="fjump_menu"></div></div><div id="ct" class="wp cl w">
+<div class="nfl">
+<div class="f_c altw">
+<div id="messagetext" class="alert_info">
+<p>您已加入该群组<script type="text/javascript" reload="1">setTimeout("window.location.href ='forum.php?mod=group&fid=12';", 3000);</script></p>
+<p class="alert_btnleft"><a href="forum.php?mod=group&fid=12">如果您的浏览器没有自动跳转，请点击此链接</a></p>
+</div>
+</div>
+</div>
+</div>	</div>
+
+<script src="home.php?mod=spacecp&ac=pm&op=checknewpm&rand=1398241948" type="text/javascript"></script>
+<script src="home.php?mod=misc&ac=sendmail&rand=1398241948" type="text/javascript"></script>
+<script type="text/javascript">var navwx = 'http://mat1.gtimg.com/cd/haitao/gengxin2/erweima01.jpg';</script>
+<script src="static/tencent/js/base.js?Ajf" type="text/javascript" type="text/javascript"></script>
+
+
+
+<script type="text/javascript">
+_attachEvent(window, 'load', getForbiddenFormula, document);
+function getForbiddenFormula() {
+var toGetForbiddenFormulaFIds = function () {
+ajaxget('plugin.php?id=cloudsearch&formhash=f592a4b7');
+};
+var a = document.body.getElementsByTagName('a');
+for(var i = 0;i < a.length;i++){
+if(a[i].getAttribute('sc')) {
+a[i].setAttribute('mid', hash(a[i].href));
+a[i].onmousedown = function() {toGetForbiddenFormulaFIds();};
+}
+}
+var btn = document.body.getElementsByTagName('button');
+for(var i = 0;i < btn.length;i++){
+if(btn[i].getAttribute('sc')) {
+btn[i].setAttribute('mid', hash(btn[i].id));
+btn[i].onmousedown = function() {toGetForbiddenFormulaFIds();};
+}
+}
+}
+</script>
+
+<div id="ft"><div class="wp a_f"><iframe frameborder="0" scrolling="no" src="http://mycd.qq.com/htm/qpcs/xdcqp.htm" width="1200" height="187" style="margin:0 auto;border:0px solid #ccc"></iframe></div><div class="wp cl"><div class="y"><div style="margin:2px 0 0 5px"><a href="http://mycd.qq.com/misc.php?mod=mobile" target="_blank"><img src="http://mat1.gtimg.com/cd/bbs/caidan.png" height="36" width="36" border="0"></a></div></div><div id="flk" class="y">
+<p>
+<a href="javascript:;"  onclick="showWindow('miscreport', 'misc.php?mod=report&url='+REPORTURL);return false;">举报</a><span class="pipe">|</span><a href="forum.php?mod=misc&action=showdarkroom" >小黑屋</a><span class="pipe">|</span><a href="archiver/" >Archiver</a><span class="pipe">|</span><strong><a href="http://cd.qq.com/" target="_blank">腾讯大成网</a></strong>
+&nbsp;<a href="http://discuz.qq.com/service/security" target="_blank" title="防水墙保卫网站远离侵害"><img src="static/image/common/security.png"></a>&nbsp;&nbsp;<span id="tcss"></span><script type="text/javascript" src="http://tcss.qq.com/ping.js?v=1VERHASH" charset="utf-8"></script><script type="text/javascript" reload="1">pgvMain({"discuzParams":{"r2":"7165696","ui":12531004,"ty":2,"rt":"group","md":"group","fi":"12","pn":1,"qq":"010","logo":11},"extraParams":""});</script><style>
+.post_rbox .recomm li a { font-size:13px; }
+</style></p>
+<p class="xs0">
+GMT+8, 2014-4-23 16:32<span id="debuginfo">
+, Processed in 1.582023 second(s), Total 21, Slave 15 queries
+, Memcache On.
+</span>
+</p>
+</div>
+<div id="frt">
+<p class="xs0">Copyright &copy; 1998 - 2014 Tencent Inc.</p>
+</div></div>
+</div>			<div id="discuz_tips" style="display:none;"></div>
+			<script type="text/javascript">
+				var tipsinfo = '7165696|X3.1|0.6||0||12531004|20|1398241948|61c7cf130f452fa7ce314a88a8d9f0b3|2';
+			</script>
+			<script src="http://discuz.gtimg.cn/cloud/scripts/discuz_tips.js?v=1" type="text/javascript" charset="UTF-8"></script><script src="http://mat1.gtimg.com/cd/tencent_city/static/js/tcbbs_pgv.js?Ajf" type="text/javascript"></script></body>
+</html>

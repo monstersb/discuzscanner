@@ -7,8 +7,6 @@ import subprocess
 
 import Rule
 
-
-
 class Detector(object):
     def __init__(self, rule):
         self.rule = rule
@@ -16,7 +14,6 @@ class Detector(object):
 
     def detect(self):
         pass
-
 
 class Custom16(Detector):
     def __init__(self, rule):
@@ -42,7 +39,6 @@ class Custom16(Detector):
         if self.rule.basis == 'keyword':
             if self.rule.debug:
                 open('debug.htm', 'w').write(r.content)
-                #print self.rule.keyword
             if len(re.findall(self.rule.keyword, r.content)) > 0:
                 return True
             else:
@@ -100,15 +96,19 @@ class Fuzzy(Detector):
 
     def detect(self):
         super(Fuzzy, self).detect()
-        r = self.request()
-        if self.rule.basis == 'keyword':
-            if self.rule.debug:
-                open('debug.htm', 'w').write(r.content)
-                #print self.rule.keyword
-            if len(re.findall(self.rule.keyword, r.content)) > 0:
-                return True
-            else:
-                return False
+        try:
+            r = self.request()
+            if self.rule.basis == 'keyword':
+                content = r.content.decode(r.encoding)
+                if self.rule.debug:
+                    open('debug.htm', 'w').write(r.content)
+                if len(re.findall(self.rule.keyword, content, re.S)) > 0:
+                    return True
+                else:
+                    return False
+        except:
+            print sys.exc_info()
+            pass
         return False
 
 class Aduit(Detector):
@@ -121,10 +121,10 @@ class Aduit(Detector):
         super(Aduit, self).detect()
         try:
             content = open(self.rule.url, 'r').read()
-            #print content
             re.findall(self.rule.keyword, content, re.S)[0]
             return True
         except:
+            print sys.exc_info()
             return False
         return True
 
@@ -198,7 +198,6 @@ class SWFAduit(Detector):
         super(SWFAduit, self).detect()
         try:
             content = self.decompile()
-            #print content
             re.findall(self.rule.customdata, content)[0]
             return True
         except:
@@ -264,10 +263,7 @@ class Common(Detector):
                 [r'(?:(?:ob_start)|(?:assert)|(?:exec)|(?:system)|(?:shell_exec)|(?:passthru)|(?:pcntl_exec))[^;]*\$_(?:(?:GET)|(?:POST)|(?:COOKIE))?\s*\[[^;]*\][^;]*\)?', {'severity':'High', 'xtype':'Command Execution', 'suggestion':''}],
                 ]
         for b in blist:
-            print b[0]
             klist = re.findall(b[0], content, re.S)
-            print content
-            print klist
             for k in klist:
                 bug = b[1].copy()
                 bug['xurl'] = fname
@@ -276,11 +272,9 @@ class Common(Detector):
 
     def detect(self):
         super(Common, self).detect()
-        #for i in open
         flist = self.getuserfile()
         for fname in flist:
             bug = self.aduit(fname)
             if bug:
                 self.addresult(bug)
-        #self.addresult('High', 'SB', 'asdasdadadasd', '', '')
         return False

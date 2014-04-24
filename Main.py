@@ -1,4 +1,5 @@
 #! /usr/bin/python
+# -*- coding:utf-8 -*-
 
 import getopt
 import sys
@@ -46,8 +47,8 @@ class Main(object):
                     raise
             else:
                 #throw error 
-                re.findall('^http://[a-z0-9\.-]*/$', self.url, re.IGNORECASE)[0]
-                self.headers = str2dict(opts['-h'], ';', '=')
+                re.findall('^http://[a-z0-9\./-]*/$', self.url, re.IGNORECASE)[0]
+                self.headers = str2dict(opts['-h'], ';;;;;', '=')
                 #print self.headers
                 self.cookies = str2dict(opts['-c'], ';', '=')
                 #print self.cookies

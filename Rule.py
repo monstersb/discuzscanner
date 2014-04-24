@@ -74,7 +74,7 @@ class Rule(object):
                 self.customdata = ruleJson['customdata']
             return True
         except:
-            print >> sys.stderr, 'Rule error!', sys.exc_info()
+            print >> sys.stderr, 'Rule error!', self.rfname, sys.exc_info()
             return False
 
     def detect(self, reserve=()):

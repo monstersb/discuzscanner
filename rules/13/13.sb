@@ -1,1 +1,16 @@
-{"program":"discuz", "detector":"Fuzzy", "method":"get", "cookies":true, "headers":true, "basis":"keyword", "keyword":"</", "type":"Database Error", "severity":"Medium", "url":"home.php?mod=spacecp&ac=pm&op=pm_report&pmid=225689&inajax=1&formhash=e57bdd35&handlekey=a_pmreport_225684&pmreportsubmit=true&referer=http://x", "payload":"", "description":"", "suggestion":"update", "file":"home.php"}
+{
+    "program": "discuz",
+    "detector": "Fuzzy",
+    "method": "get",
+    "cookies": true,
+    "headers": true,
+    "basis": "keyword",
+    "keyword": "UCenter info\\:\\</b\\> MySQL Query Error",
+    "type": "Database Error",
+    "severity": "Medium",
+    "url": "home.php?mod=spacecp&ac=pm&op=pm_report&pmid=225689&inajax=1&formhash=e57bdd35&handlekey=a_pmreport_225684&pmreportsubmit=true&referer=http://x",
+    "payload": "",
+    "description": "",
+    "suggestion": "update",
+    "file": "home.php"
+}

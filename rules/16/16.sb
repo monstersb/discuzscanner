@@ -1,1 +1,1 @@
-{"program":"discuz", "detector":"Custom", "detectorx":"Custom16", "customdata":"", "method":"get", "cookies":true, "headers":true, "basis":"keyword", "keyword":"", "type":"CSRF", "severity":"Low", "url":"", "payload":"", "description":"", "suggestion":"update", "file":"forum.php"}
+{"program":"discuz", "detector":"Fuzzy", "method":"get", "cookies":true, "headers":true, "basis":"keyword", "keyword":"\u8be5\u7fa4\u7ec4", "type":"CSRF", "severity":"Low", "url":"forum.php?mod=group&action=join&fid=12", "payload":"", "description":"", "suggestion":"update", "file":"forum.php"}

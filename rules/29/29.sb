@@ -1,0 +1,1 @@
+{"program":"discuz", "detector":"Accurate", "method":"get", "cookies":false, "headers":false, "md5":"32375889c1fc93dfb0f1de9e94d41301", "type":"Flass XSS", "severity":"Medium", "url":"static/image/common/doodle.swf?config=http://unikone.github.io/dz.doodle.xml", "payload":"", "description":"", "suggestion":"update", "file":"static/image/common/doodle.swf"}
